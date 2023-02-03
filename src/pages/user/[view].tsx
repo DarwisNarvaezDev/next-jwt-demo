@@ -1,19 +1,16 @@
 import darkSvg from '/public/drk-indx-bg.svg'
 import brightSvg from '/public/brth-indx-bg.svg'
-import RegisterForm from "@/components/UserForm";
+import UserForm from "@/components/UserForm";
 import RenderProperly from "@/components/RenderProperly";
-import userLocationValues from "@/util/userLocationValues";
 import validateMail from "@/util/validateMail";
 import validatePassword from "@/util/validatePassword";
-import { Box, color, Flex, Heading, useColorMode, useToast } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { ReactElement, useEffect, useRef, useState } from "react";
+import { Box, Flex, Heading, useColorMode, useToast } from "@chakra-ui/react";
+import { useRef, useState } from "react";
 import Image from 'next/image';
 
 export default function userView() {
 
     const { colorMode } = useColorMode();
-
     const [isError, setIsError] = useState(false);
     const [formErrorMessage, setformErrorMessage] = useState('');
     const toast = useToast()
@@ -80,7 +77,7 @@ export default function userView() {
         } 
     }
     // Register form ==============
-    
+
     // Login form ==============
     const userLogin = async () => {
         const data = await fetch('/api/user/signin', {
@@ -156,7 +153,7 @@ export default function userView() {
                     <RenderProperly
                         id={"formContentWrapper"}
                         component={
-                            <RegisterForm
+                            <UserForm
                                 isError={isError}
                                 usernameRef={usernameRef}
                                 passwordRef={passwordRef}
@@ -173,7 +170,7 @@ export default function userView() {
     )
 }
 
-{/* <RegisterForm
+{/* <UserForm
                 isError={isError}
                 usernameRef={usernameRef}
                 passwordRef={passwordRef}
