@@ -1,37 +1,43 @@
-import { Flex, FormControl, FormErrorMessage, FormLabel, Heading, Input, useToast } from "@chakra-ui/react"
+import { color, Flex, FormControl, FormErrorMessage, FormLabel, Heading, Input, useColorMode, useToast } from "@chakra-ui/react"
+import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 
-type RegisterFormProps = {
+type UserFormProps = {
     isError: boolean,
     usernameRef: React.RefObject<HTMLInputElement>,
     passwordRef: React.RefObject<HTMLInputElement>,
     validateForm: Function,
     registerUser: Function,
-    registerFormErrorMessage: string
+    UserFormErrorMessage: string
 }
 
-export default function RegisterForm({
+export default function UserForm({
     isError,
     usernameRef,
     passwordRef,
     validateForm,
     registerUser,
-    registerFormErrorMessage
-}: RegisterFormProps) {
+    UserFormErrorMessage
+}: UserFormProps) {
+
+    const { colorMode } = useColorMode();
+    const router = useRouter()
+    const { view } = router.query;
 
     return (
         <>
-            <Heading size={"xl"}>
-                Sign up
+            <Heading size={"xl"} color={"white"}>
+                { view === 'signup' ? 'Sign Up' : 'Login' }
             </Heading>
             <FormControl
-                id={"registerForm"}
+                id={"UserForm"}
                 display={"flex"}
                 flexDir={"column"}
                 pt={"2rem"}
                 height={"100%"}
                 w={"100%"}
                 isInvalid={isError}
+                color={"gray.400"}
             >
                 <FormLabel>Email</FormLabel>
                 <Input type={"email"} ref={usernameRef}
@@ -57,10 +63,11 @@ export default function RegisterForm({
                         w={"50%"}
                         mt={"3rem"}
                         type={"submit"}
-                        bg={"green.700"}
+                        bg={view === 'signup' ? "green.500" : "blue.500"}
                         variant={"filled"}
-                        value={"Done"}
+                        value={view === 'signup' ? "Create" : "Login"}
                         cursor={"pointer"}
+                        color={"white"}
                         onClick={(e) => {
                             e.preventDefault()
                             if (validateForm()) registerUser()
@@ -74,11 +81,17 @@ export default function RegisterForm({
                         variant={"outline"}
                         value={"Cancel"}
                         cursor={"pointer"}
+                        color={"white"}
+                        onClick={()=>{
+                            router.push({
+                                pathname: '/'
+                            })
+                        }}
                     >
                     </Input>
                 </Flex>
                 {isError && (
-                    <FormErrorMessage>{registerFormErrorMessage ? registerFormErrorMessage : 'Please check the form'}</FormErrorMessage>
+                    <FormErrorMessage>{UserFormErrorMessage ? UserFormErrorMessage : 'Please check the form'}</FormErrorMessage>
                 )}
             </FormControl>
         </>

@@ -1,9 +1,12 @@
-import { BreadcrumbSeparator, Button, Flex, Heading, Link, Text } from "@chakra-ui/react";
+import { BreadcrumbSeparator, Button, Flex, Heading, Link, Text, useColorMode } from "@chakra-ui/react";
 import Image from "next/image";
-import svg from 'public/cool-background.svg'
+import darkSvg from '/public/drk-indx-bg.svg'
+import brightSvg from '/public/brth-indx-bg.svg'
 import NextLink from 'next/link'
 
 export default function Home() {
+
+  const { colorMode } = useColorMode();
 
   return (
     <>
@@ -12,21 +15,24 @@ export default function Home() {
         id={"Greeter"}
         w={"100%"}
         h={"100vh"}
+        position={"relative"}
       >
         <Flex
           width={"100%"}
           height={"100%"}
           position={"absolute"}
           justifyContent={"flex-end"}
+          zIndex={99}
         >
-          <Image alt="greeter" src={svg} />
+          <Image height={600} alt="greeter" src={colorMode === 'dark' ? darkSvg : brightSvg} />
         </Flex>
         <Flex
             height={"100%"}
-            w={"50%"}
+            w={"40%"}
             p={"5rem"}
-            // bg={"tomato"}
             flexDir={"column"}
+            position={'absolute'}
+            zIndex={99999}
           >
             <Heading>Welcome to JWT Demo</Heading>
             <Heading 
@@ -43,7 +49,7 @@ export default function Home() {
                 ml={"1rem"} 
                 as={NextLink}
                 href='/user/signup'
-                width={"50%"}
+                width={"60%"}
                 borderRadius={"5px"}
                 textAlign={"center"}
                 p={"1rem"}
@@ -54,7 +60,7 @@ export default function Home() {
                 ml={"1rem"} 
                 as={NextLink}
                 href='/user/login'
-                width={"50%"}
+                width={"60%"}
                 borderRadius={"5px"}
                 textAlign={"center"}
                 p={"1rem"}
