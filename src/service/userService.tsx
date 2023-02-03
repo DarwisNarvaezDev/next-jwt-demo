@@ -5,6 +5,16 @@ interface TypeUserInfo {
     joined?: string
 }
 
+export async function findUser({ email }: TypeUserInfo){
+    try{
+        if( !email ) throw new Error('No user received in parameters');
+        const found = await getDb()("login").where("email", email).returning("*");
+        return found;
+    }catch(error){
+        throw error;
+    }
+}
+
 export async function checkUser({ email }: TypeUserInfo){
     try{
         if( !email ) throw new Error('No user received in parameters');

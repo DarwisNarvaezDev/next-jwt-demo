@@ -14,9 +14,8 @@ export default function userView() {
 
     const { colorMode } = useColorMode();
 
-    // Register form validation ==============
     const [isError, setIsError] = useState(false);
-    const [registerFormErrorMessage, setRegisterFormErrorMessage] = useState('');
+    const [formErrorMessage, setformErrorMessage] = useState('');
     const toast = useToast()
     const usernameRef: any = useRef("");
     const passwordRef: any = useRef("");
@@ -29,24 +28,26 @@ export default function userView() {
                 title: 'Failed to sign up',
                 position: "top-right",
                 status: "error",
+                description: "An email and a password must be submitted."
             })
             setIsError(true);
-            setRegisterFormErrorMessage("Please check the form inputs")
+            setformErrorMessage("Please check the form inputs")
             return false
         }
         if (!validateMail(email)) {
             setIsError(true);
-            setRegisterFormErrorMessage("Please provide a valid email")
+            setformErrorMessage("Please provide a valid email")
             return false
         }
         if (!validatePassword(password)) {
             setIsError(true);
-            setRegisterFormErrorMessage("The password must have more than 6 characters")
+            setformErrorMessage("The password must have more than 6 characters")
             return false
         }
         setIsError(false)
         return true;
     }
+    // Register form ==============
     const registerUser = async () => {
         const data = await fetch('/api/user/register', {
             method: "POST",
@@ -59,10 +60,65 @@ export default function userView() {
                 email: usernameRef.current.value
             })
         });
-        const rawOutput = await data.json();
-        console.log(rawOutput);
+        const { accessToken, message } = await data.json();
+        if( !accessToken ){
+            toast({
+                isClosable: true,
+                title: 'Failed to sign up',
+                position: "top-right",
+                status: "error",
+                description: message
+            })
+        }else{
+            toast({
+                isClosable: true,
+                title: 'Sign up succeded',
+                position: "top-right",
+                status: "success",
+            })
+            console.log(accessToken);
+        } 
     }
-    // Register form validation ==============
+    // Register form ==============
+    
+    // Login form ==============
+    const userLogin = async () => {
+        const data = await fetch('/api/user/signin', {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                password: passwordRef.current.value,
+                email: usernameRef.current.value
+            })
+        });
+        const { accessToken, message } = await data.json();
+        if( !accessToken ){
+            toast({
+                isClosable: true,
+                title: 'Failed to sign in',
+                position: "top-right",
+                status: "error",
+                description: message
+            })
+            if( message === 'Invalid password' ){
+                setIsError(true);
+                setformErrorMessage("Invalid Password")
+                passwordRef.current.value = ''
+            }
+        }else{
+            toast({
+                isClosable: true,
+                title: 'Login succeded',
+                position: "top-right",
+                status: "success",
+            })
+            console.log(accessToken);
+        }
+    }
+    // Login form ==============
 
     return (
         <Box
@@ -106,7 +162,8 @@ export default function userView() {
                                 passwordRef={passwordRef}
                                 validateForm={validateForm}
                                 registerUser={registerUser}
-                                UserFormErrorMessage={registerFormErrorMessage}
+                                UserFormErrorMessage={formErrorMessage}
+                                userLogin={userLogin}
                             />
                         }
                     />
@@ -122,5 +179,5 @@ export default function userView() {
                 passwordRef={passwordRef}
                 validateForm={validateForm}
                 registerUser={registerUser}
-                registerFormErrorMessage={registerFormErrorMessage}
+                formErrorMessage={formErrorMessage}
               /> */}

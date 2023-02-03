@@ -8,7 +8,8 @@ type UserFormProps = {
     passwordRef: React.RefObject<HTMLInputElement>,
     validateForm: Function,
     registerUser: Function,
-    UserFormErrorMessage: string
+    UserFormErrorMessage: string,
+    userLogin: Function
 }
 
 export default function UserForm({
@@ -17,7 +18,8 @@ export default function UserForm({
     passwordRef,
     validateForm,
     registerUser,
-    UserFormErrorMessage
+    UserFormErrorMessage,
+    userLogin
 }: UserFormProps) {
 
     const { colorMode } = useColorMode();
@@ -43,7 +45,13 @@ export default function UserForm({
                 <Input type={"email"} ref={usernameRef}
                     onKeyDown={(e) => {
                         if (e.code === "Enter") {
-                            if (validateForm()) registerUser()
+                            if (validateForm()){
+                                if( view === 'signup' ){
+                                    registerUser()
+                                }else{
+                                    userLogin()
+                                }
+                            }
                         }
                     }}
                 />
@@ -51,7 +59,13 @@ export default function UserForm({
                 <Input type={"password"} ref={passwordRef}
                     onKeyDown={(e) => {
                         if (e.code === "Enter") {
-                            if (validateForm()) registerUser()
+                            if (validateForm()){
+                                if( view === 'signup' ){
+                                    registerUser()
+                                }else{
+                                    userLogin()
+                                }
+                            }
                         }
                     }}
                 />
@@ -70,7 +84,13 @@ export default function UserForm({
                         color={"white"}
                         onClick={(e) => {
                             e.preventDefault()
-                            if (validateForm()) registerUser()
+                            if (validateForm()){
+                                if( view === 'signup' ){
+                                    registerUser()
+                                }else{
+                                    userLogin()
+                                }
+                            }
                         }}
                     />
                     <Input

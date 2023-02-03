@@ -12,7 +12,7 @@ export default async function handler(
     if( !email || !password ){
         return res
             .status(400)
-            .json(`${console.log(req.body)}Incorrect form submission`)
+            .json({ accessToken: null, message: "Invalid form submission" })
     }
     // Validate if user exists
     const exist = await checkUser({email: email});
@@ -37,6 +37,6 @@ export default async function handler(
           res.status(400).json(error);
       }
     }else{
-      res.status(200).json({ message: `User: ${email} already exists, using the refresh token` })
+      res.status(400).json({ accessToken: null, message: `User: ${email} already exist.` })
     }
 }

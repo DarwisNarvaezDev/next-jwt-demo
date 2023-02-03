@@ -49,7 +49,7 @@ export default function Home() {
                 ml={"1rem"} 
                 as={NextLink}
                 href='/user/signup'
-                width={"60%"}
+                width={"300px"}
                 borderRadius={"5px"}
                 textAlign={"center"}
                 p={"1rem"}
@@ -60,7 +60,7 @@ export default function Home() {
                 ml={"1rem"} 
                 as={NextLink}
                 href='/user/login'
-                width={"60%"}
+                width={"300px"}
                 borderRadius={"5px"}
                 textAlign={"center"}
                 p={"1rem"}
