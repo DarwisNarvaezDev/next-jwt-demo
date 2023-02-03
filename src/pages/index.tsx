@@ -1,108 +1,75 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
-import { Button, Flex, FormControl, FormErrorMessage, FormLabel, Heading, Input, useToast } from '@chakra-ui/react'
-import { useEffect, useRef, useState } from 'react'
-
-const inter = Inter({ subsets: ['latin'] })
+import { BreadcrumbSeparator, Button, Flex, Heading, Link, Text, useColorMode } from "@chakra-ui/react";
+import Image from "next/image";
+import darkSvg from '/public/drk-indx-bg.svg'
+import brightSvg from '/public/brth-indx-bg.svg'
+import NextLink from 'next/link'
 
 export default function Home() {
 
-  const [isError, setIsError] = useState(false);
-  const toast = useToast()
-  const usernameRef: any = useRef("");
-  const passwordRef: any = useRef("");
-
-  const validateForm = () => {
-    if (usernameRef.current.value === '' || passwordRef.current.value === '') {
-      toast({
-        isClosable: true,
-        title: 'Failed to sign in',
-        position: "top-right",
-        status: "error",
-      })
-      setIsError(true);
-      return false
-    } else {
-      setIsError(false);
-      return true
-    }
-  }
-
-  const registerUser = async () => {
-
-    const data = await fetch('/api/user/register', {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: "Darwis",
-        password: "123",
-        email: "darwis@darwis.com"
-      })
-    });
-    const rawOutput = await data.json();
-    console.log(rawOutput);
-  }
+  const { colorMode } = useColorMode();
 
   return (
     <>
-      <main className={styles.main}>
+      <Flex
+        as={"main"}
+        id={"Greeter"}
+        w={"100%"}
+        h={"100vh"}
+        position={"relative"}
+      >
         <Flex
-          width={"50vh"}
-          height={"70vh"}
-          bg={"gray.700"}
-          borderRadius={"10px"}
-          justifyContent={"center"}
-          alignItems={"center"}
-          boxShadow={"2xl"}
-          border={"0.5px solid gray"}
-          flexDir={"column"}
-          p={"3rem"}
+          width={"100%"}
+          height={"100%"}
+          position={"absolute"}
+          justifyContent={"flex-end"}
+          zIndex={99}
         >
-          <FormControl
-            display={"flex"}
-            flexDir={"column"}
-            pt={"2rem"}
-            height={"100%"}
-            w={"100%"}
-            isInvalid={isError}
-          >
-            <FormLabel>Email</FormLabel>
-            <Input type={"email"} ref={usernameRef}
-              onKeyDown={(e) => {
-                if (e.code === "Enter") {
-                  if (validateForm()) registerUser()
-                }
-              }}
-            />
-            <FormLabel mt={"5"}>Password</FormLabel>
-            <Input type={"password"} ref={passwordRef}
-              onKeyDown={(e) => {
-                if (e.code === "Enter") {
-                  if (validateForm()) registerUser()
-                }
-              }}
-            />
-            <Input
-              mt={"3rem"}
-              type={"submit"}
-              variant={"filled"}
-              value={"Login"}
-              onClick={(e) => {
-                e.preventDefault()
-                if (validateForm()) registerUser()
-              }}
-            />
-            {isError && (
-              <FormErrorMessage>Please check the form.</FormErrorMessage>
-            )}
-          </FormControl>
+          <Image height={600} alt="greeter" src={colorMode === 'dark' ? darkSvg : brightSvg} />
         </Flex>
-      </main>
+        <Flex
+            height={"100%"}
+            w={"40%"}
+            p={"5rem"}
+            flexDir={"column"}
+            position={'absolute'}
+            zIndex={99999}
+          >
+            <Heading>Welcome to JWT Demo</Heading>
+            <Heading 
+            color={"gray.300"}
+            size={"2xl"}
+            > with Next.js</Heading>
+            <Flex
+              mt={"2rem"}
+              gap={10}
+              flexDir={"column"}
+            >
+              <Text fontWeight={"black"}>Please go to the authentication routes to start demoing away!</Text>
+              <Button
+                ml={"1rem"} 
+                as={NextLink}
+                href='/user/signup'
+                width={"300px"}
+                borderRadius={"5px"}
+                textAlign={"center"}
+                p={"1rem"}
+                >
+                Sign Up | {`<App>/user/signup`}
+              </Button>
+              <Button
+                ml={"1rem"} 
+                as={NextLink}
+                href='/user/login'
+                width={"300px"}
+                borderRadius={"5px"}
+                textAlign={"center"}
+                p={"1rem"}
+                >
+                Login | {`<App>/user/login`}
+              </Button>
+            </Flex>
+          </Flex>
+      </Flex>
     </>
   )
 }
