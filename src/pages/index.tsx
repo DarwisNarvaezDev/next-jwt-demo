@@ -1,15 +1,15 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
-import { Button, Flex, FormControl, FormErrorMessage, FormLabel, Heading, Input, useToast } from '@chakra-ui/react'
-import { useEffect, useRef, useState } from 'react'
+import { Flex, FormControl, FormErrorMessage, FormLabel, Heading, Input, useToast } from '@chakra-ui/react'
+import { useRef, useState } from 'react'
+import RegisterForm from '@/components/RegisterForm'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
   const [isError, setIsError] = useState(false);
+  const [registerFormErrorMessage, setRegisterFormErrorMessage] = useState('');
   const toast = useToast()
   const usernameRef: any = useRef("");
   const passwordRef: any = useRef("");
@@ -23,6 +23,7 @@ export default function Home() {
         status: "error",
       })
       setIsError(true);
+      setRegisterFormErrorMessage("Please check the form inputs")
       return false
     } else {
       setIsError(false);
@@ -31,7 +32,6 @@ export default function Home() {
   }
 
   const registerUser = async () => {
-
     const data = await fetch('/api/user/register', {
       method: "POST",
       headers: {
@@ -39,9 +39,8 @@ export default function Home() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username: "Darwis",
-        password: "123",
-        email: "darwis@darwis.com"
+        password: passwordRef.current.value,
+        email: usernameRef.current.value
       })
     });
     const rawOutput = await data.json();
@@ -53,7 +52,7 @@ export default function Home() {
       <main className={styles.main}>
         <Flex
           width={"50vh"}
-          height={"70vh"}
+          height={"60vh"}
           bg={"gray.700"}
           borderRadius={"10px"}
           justifyContent={"center"}
@@ -61,46 +60,15 @@ export default function Home() {
           boxShadow={"2xl"}
           border={"0.5px solid gray"}
           flexDir={"column"}
-          p={"3rem"}
         >
-          <FormControl
-            display={"flex"}
-            flexDir={"column"}
-            pt={"2rem"}
-            height={"100%"}
-            w={"100%"}
-            isInvalid={isError}
-          >
-            <FormLabel>Email</FormLabel>
-            <Input type={"email"} ref={usernameRef}
-              onKeyDown={(e) => {
-                if (e.code === "Enter") {
-                  if (validateForm()) registerUser()
-                }
-              }}
-            />
-            <FormLabel mt={"5"}>Password</FormLabel>
-            <Input type={"password"} ref={passwordRef}
-              onKeyDown={(e) => {
-                if (e.code === "Enter") {
-                  if (validateForm()) registerUser()
-                }
-              }}
-            />
-            <Input
-              mt={"3rem"}
-              type={"submit"}
-              variant={"filled"}
-              value={"Login"}
-              onClick={(e) => {
-                e.preventDefault()
-                if (validateForm()) registerUser()
-              }}
-            />
-            {isError && (
-              <FormErrorMessage>Please check the form.</FormErrorMessage>
-            )}
-          </FormControl>
+          <RegisterForm
+            isError={isError}
+            usernameRef={usernameRef}
+            passwordRef={passwordRef}
+            validateForm={validateForm}
+            registerUser={registerUser}
+            registerFormErrorMessage={registerFormErrorMessage}
+          />
         </Flex>
       </main>
     </>
