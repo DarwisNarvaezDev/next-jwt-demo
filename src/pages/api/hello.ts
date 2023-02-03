@@ -7,7 +7,8 @@ type Data = {
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
-  res.status(200).json({ name: 'John Doe' })
+  const token = process.env.APP_TOKEN
+  res.status(200).json({ token: token})
 }
