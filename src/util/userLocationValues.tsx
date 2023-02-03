@@ -1,4 +1,4 @@
 export default {
-    LOCATION_SIGN_IN: 2,
-    LOCATION_LOGIN: 1,
+    LOCATION_SIGN_UP: 'signup',
+    LOCATION_LOGIN: 'login',
 }

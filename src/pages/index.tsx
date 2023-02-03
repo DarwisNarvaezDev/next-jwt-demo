@@ -1,113 +1,69 @@
-import { Flex, FormControl, FormErrorMessage, FormLabel, Heading, Input, useToast } from '@chakra-ui/react'
-import { useRef, useState } from 'react'
-import RegisterForm from '@/components/RegisterForm'
-import validateMail from '@/util/validateMail'
-import validatePassword from '@/util/validatePassword'
-import RenderProperly from '@/components/RenderProperly'
-import userLocationValues from '@/util/userLocationValues'
+import { BreadcrumbSeparator, Button, Flex, Heading, Link, Text } from "@chakra-ui/react";
+import Image from "next/image";
+import svg from 'public/cool-background.svg'
+import NextLink from 'next/link'
 
 export default function Home() {
 
-  const [userLocation, setUserLocation] = useState<number>(userLocationValues.LOCATION_LOGIN);
-  const [isError, setIsError] = useState(false);
-  const [registerFormErrorMessage, setRegisterFormErrorMessage] = useState('');
-  const toast = useToast()
-  const usernameRef: any = useRef("");
-  const passwordRef: any = useRef("");
-
-  const validateForm = () => {
-
-    const email = usernameRef.current.value;
-    const password = passwordRef.current.value;
-
-    if (email === '' || password === '') {
-      toast({
-        isClosable: true,
-        title: 'Failed to sign up',
-        position: "top-right",
-        status: "error",
-      })
-      setIsError(true);
-      setRegisterFormErrorMessage("Please check the form inputs")
-      return false
-    }
-
-    if (!validateMail(email)) {
-      setIsError(true);
-      setRegisterFormErrorMessage("Please provide a valid email")
-      return false
-    }
-
-    if (!validatePassword(password)) {
-      setIsError(true);
-      setRegisterFormErrorMessage("The password must have more than 6 characters")
-      return false
-    }
-
-    setIsError(false)
-    return true;
-  }
-
-  const registerUser = async () => {
-    const data = await fetch('/api/user/register', {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        password: passwordRef.current.value,
-        email: usernameRef.current.value
-      })
-    });
-    const rawOutput = await data.json();
-    console.log(rawOutput);
-  }
-
   return (
     <>
-      <Flex 
+      <Flex
         as={"main"}
-        width={"100%"}
-        height={"100vh"}
-        justifyContent={"center"}
-        mt={"6rem"}
-        >
+        id={"Greeter"}
+        w={"100%"}
+        h={"100vh"}
+      >
         <Flex
-          width={"50vh"}
-          height={"60vh"}
-          bg={"gray.700"}
-          borderRadius={"10px"}
-          justifyContent={"center"}
-          alignItems={"center"}
-          boxShadow={"2xl"}
-          border={"0.5px solid gray"}
-          flexDir={"column"}
+          width={"100%"}
+          height={"100%"}
+          position={"absolute"}
+          justifyContent={"flex-end"}
         >
-          <RenderProperly
-            id={"formContentWrapper"}
-            component={userLocation === userLocationValues.LOCATION_LOGIN ? (<></>) : (<>
-              <RegisterForm
-                isError={isError}
-                usernameRef={usernameRef}
-                passwordRef={passwordRef}
-                validateForm={validateForm}
-                registerUser={registerUser}
-                registerFormErrorMessage={registerFormErrorMessage}
-              />
-            </>)}
-          />
+          <Image alt="greeter" src={svg} />
         </Flex>
+        <Flex
+            height={"100%"}
+            w={"50%"}
+            p={"5rem"}
+            // bg={"tomato"}
+            flexDir={"column"}
+          >
+            <Heading>Welcome to JWT Demo</Heading>
+            <Heading 
+            color={"gray.300"}
+            size={"2xl"}
+            > with Next.js</Heading>
+            <Flex
+              mt={"2rem"}
+              gap={10}
+              flexDir={"column"}
+            >
+              <Text fontWeight={"black"}>Please go to the authentication routes to start demoing away!</Text>
+              <Button
+                ml={"1rem"} 
+                as={NextLink}
+                href='/user/signup'
+                width={"50%"}
+                borderRadius={"5px"}
+                textAlign={"center"}
+                p={"1rem"}
+                >
+                Sign Up | {`<App>/user/signup`}
+              </Button>
+              <Button
+                ml={"1rem"} 
+                as={NextLink}
+                href='/user/login'
+                width={"50%"}
+                borderRadius={"5px"}
+                textAlign={"center"}
+                p={"1rem"}
+                >
+                Login | {`<App>/user/login`}
+              </Button>
+            </Flex>
+          </Flex>
       </Flex>
     </>
   )
 }
-
-{/* <RegisterForm
-  isError={isError}
-  usernameRef={usernameRef}
-  passwordRef={passwordRef}
-  validateForm={validateForm}
-  registerUser={registerUser}
-  registerFormErrorMessage={registerFormErrorMessage}
-/> */}

@@ -3,7 +3,7 @@ import { Component, ReactElement } from "react"
 
 export interface RenderProperlyProps {
     id: string,
-    component: ReactElement<any, any>
+    component: ReactElement<any, any> | undefined
 }
 
 export default function RenderProperly ({ id, component }: RenderProperlyProps){
