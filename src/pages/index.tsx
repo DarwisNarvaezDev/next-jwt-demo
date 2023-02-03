@@ -3,6 +3,8 @@ import styles from '@/styles/Home.module.css'
 import { Flex, FormControl, FormErrorMessage, FormLabel, Heading, Input, useToast } from '@chakra-ui/react'
 import { useRef, useState } from 'react'
 import RegisterForm from '@/components/RegisterForm'
+import validateMail from '@/util/validateMail'
+import validatePassword from '@/util/validatePassword'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,7 +17,11 @@ export default function Home() {
   const passwordRef: any = useRef("");
 
   const validateForm = () => {
-    if (usernameRef.current.value === '' || passwordRef.current.value === '') {
+
+    const email = usernameRef.current.value;
+    const password = passwordRef.current.value;
+
+    if (email === '' || password === '') {
       toast({
         isClosable: true,
         title: 'Failed to sign in',
@@ -25,10 +31,22 @@ export default function Home() {
       setIsError(true);
       setRegisterFormErrorMessage("Please check the form inputs")
       return false
-    } else {
-      setIsError(false);
-      return true
+    } 
+    
+    if( !validateMail(email) ){
+      setIsError(true);
+      setRegisterFormErrorMessage("Please provide a valid email")
+      return false
     }
+
+    if( !validatePassword(password) ){
+      setIsError(true);
+      setRegisterFormErrorMessage("The password must have more than 6 characters")
+      return false
+    }
+
+    setIsError(false)
+    return true;
   }
 
   const registerUser = async () => {
