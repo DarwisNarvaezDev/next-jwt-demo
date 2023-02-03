@@ -1,15 +1,14 @@
-import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
 import { Flex, FormControl, FormErrorMessage, FormLabel, Heading, Input, useToast } from '@chakra-ui/react'
 import { useRef, useState } from 'react'
 import RegisterForm from '@/components/RegisterForm'
 import validateMail from '@/util/validateMail'
 import validatePassword from '@/util/validatePassword'
-
-const inter = Inter({ subsets: ['latin'] })
+import RenderProperly from '@/components/RenderProperly'
+import userLocationValues from '@/util/userLocationValues'
 
 export default function Home() {
 
+  const [userLocation, setUserLocation] = useState<number>(userLocationValues.LOCATION_LOGIN);
   const [isError, setIsError] = useState(false);
   const [registerFormErrorMessage, setRegisterFormErrorMessage] = useState('');
   const toast = useToast()
@@ -24,22 +23,22 @@ export default function Home() {
     if (email === '' || password === '') {
       toast({
         isClosable: true,
-        title: 'Failed to sign in',
+        title: 'Failed to sign up',
         position: "top-right",
         status: "error",
       })
       setIsError(true);
       setRegisterFormErrorMessage("Please check the form inputs")
       return false
-    } 
-    
-    if( !validateMail(email) ){
+    }
+
+    if (!validateMail(email)) {
       setIsError(true);
       setRegisterFormErrorMessage("Please provide a valid email")
       return false
     }
 
-    if( !validatePassword(password) ){
+    if (!validatePassword(password)) {
       setIsError(true);
       setRegisterFormErrorMessage("The password must have more than 6 characters")
       return false
@@ -67,7 +66,13 @@ export default function Home() {
 
   return (
     <>
-      <main className={styles.main}>
+      <Flex 
+        as={"main"}
+        width={"100%"}
+        height={"100vh"}
+        justifyContent={"center"}
+        mt={"6rem"}
+        >
         <Flex
           width={"50vh"}
           height={"60vh"}
@@ -79,16 +84,30 @@ export default function Home() {
           border={"0.5px solid gray"}
           flexDir={"column"}
         >
-          <RegisterForm
-            isError={isError}
-            usernameRef={usernameRef}
-            passwordRef={passwordRef}
-            validateForm={validateForm}
-            registerUser={registerUser}
-            registerFormErrorMessage={registerFormErrorMessage}
+          <RenderProperly
+            id={"formContentWrapper"}
+            component={userLocation === userLocationValues.LOCATION_LOGIN ? (<></>) : (<>
+              <RegisterForm
+                isError={isError}
+                usernameRef={usernameRef}
+                passwordRef={passwordRef}
+                validateForm={validateForm}
+                registerUser={registerUser}
+                registerFormErrorMessage={registerFormErrorMessage}
+              />
+            </>)}
           />
         </Flex>
-      </main>
+      </Flex>
     </>
   )
 }
+
+{/* <RegisterForm
+  isError={isError}
+  usernameRef={usernameRef}
+  passwordRef={passwordRef}
+  validateForm={validateForm}
+  registerUser={registerUser}
+  registerFormErrorMessage={registerFormErrorMessage}
+/> */}

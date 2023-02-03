@@ -1,7 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import bcrypt from 'bcrypt'
-import Login from '@/db/Login';
-import Users from '@/db/Users';
 import jwt from 'jsonwebtoken'
 import {checkUser, saveUser} from '../../../service/userService';
 import { saveLoginData } from '@/service/loginService';
