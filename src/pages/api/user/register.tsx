@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
 import {checkUser, saveUser} from '../../../service/userService';
 import { saveLoginData } from '@/service/loginService';
 import { createAccessToken, createRefreshToken } from '@/service/tokenService';
-import getBrowserCookiesKeys, { createAccessTokenCookie, createRefreshTokenCookie, getBrowserCookies } from '@/service/cookieService';
+import deleteBrowserCookiesKeys, { createAccessTokenCookie, createRefreshTokenCookie, getBrowserCookies, getBrowserCookiesKeys } from '@/service/cookieService';
+import deleteBrowserCookies from '@/service/cookieService';
 
 export default async function handler(
   req: NextApiRequest,
@@ -31,14 +31,18 @@ export default async function handler(
           email: pUserEmail
         } = user[0]
         // Persist in Login DB
-        const login = await saveLoginData({ email: email, hash: hashedPassword});
         // Generate token
         const accessToken = createAccessToken(pUserEmail);
         const refreshToken = createRefreshToken(pUserId);
+        // persist login in DB
+        const login = await saveLoginData({ email: email, hash: hashedPassword, refresh: refreshToken});
         // COOKIES
-        // createAccessTokenCookie(req, res, accessToken);
-        // createRefreshTokenCookie(req, res, refreshToken);
-        getBrowserCookiesKeys(getBrowserCookies(req, res))
+        //Delete cookies is they exist
+        const keys= getBrowserCookiesKeys(getBrowserCookies(req, res));
+        deleteBrowserCookies(req, res, keys);
+        // add new ones
+        createAccessTokenCookie(req, res, accessToken);
+        createRefreshTokenCookie(req, res, refreshToken);
         // COOKIES
         // Response
         res.status(200).json({ accessToken: accessToken, message: null })

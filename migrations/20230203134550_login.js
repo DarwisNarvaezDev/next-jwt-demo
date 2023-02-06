@@ -7,6 +7,7 @@ export function up(knex) {
         table.increments("id").primary();
         table.string("email").notNullable();
         table.string("hash").notNullable();
+        table.string("refresh").nullable();
     });
 }
 

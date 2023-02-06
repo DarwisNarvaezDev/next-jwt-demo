@@ -1,5 +1,5 @@
 import { setAccessCookieExpiration, setRefreshCookieExpiration } from "@/util/ExpirationCalculator";
-import { getCookies, setCookie } from "cookies-next";
+import { deleteCookie, getCookies, setCookie } from "cookies-next";
 import { NextApiRequest, NextApiResponse } from "next";
 import { appToken } from "./tokenService";
 
@@ -79,19 +79,6 @@ export function getValidTokenKeys(
     }
 }
 
-export function deleteCookie(
-    req: NextApiRequest,
-    res: NextApiResponse,
-    key: string
-){
-    try {
-        deleteCookie(req, res, key);
-    } catch (error) {
-        throw error;
-    }
-}
-
-
 export function deleteCookies(
     req: NextApiRequest,
     res: NextApiResponse,
@@ -99,7 +86,8 @@ export function deleteCookies(
 ){
     try {
         keys.forEach( key =>{
-            deleteCookie(req, res, key)
+            // console.log(`Key to delete: ${JSON.stringify(key)}`);
+            deleteCookie(key, {req, res})
         })
     } catch (error) {
         throw error;
@@ -120,13 +108,24 @@ export function getBrowserCookies(
     }
 }
 
-export default function getBrowserCookiesKeys(cookies: any){
+export function getBrowserCookiesKeys(cookies: any){
     try {
         let keys: any[] = []
         Object.keys(cookies).forEach( key => {
             keys.push(key)
         });
-        console.log(getValidTokenKeys(keys));
+        return keys;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export default function deleteBrowserCookies(
+    req: NextApiRequest,
+    res: NextApiResponse,
+    keysData: any[]){
+    try {
+        deleteCookies(req, res, keysData);
     } catch (error) {
         throw error;
     }
