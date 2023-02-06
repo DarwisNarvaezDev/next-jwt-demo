@@ -8,6 +8,22 @@ export default function Home() {
 
   const { colorMode } = useColorMode();
 
+  async function userCustoms(){
+    // Get valid app tokens from cookie service
+    
+    // Get authorization for user
+    const data = await fetch('/api/user/checkauth', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+    const json = await data.json();
+    
+    
+  }
+
   return (
     <>
       <Flex
@@ -86,11 +102,14 @@ export default function Home() {
             >
               <Heading size={"sm"} mt={"10px"}>Unless you want to try breaching out!</Heading>
               <Button
-                as={NextLink}
-                href='/user/signup'
+                // as={NextLink}
+                // href='/user/signup'
                 width={"95%"}
                 borderRadius={"5px"}
                 textAlign={"center"}
+                onClick={()=>{
+                  userCustoms()
+                }}
               >
                 Users Only Section | {`<App>/user/usersonly`}
               </Button>

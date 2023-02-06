@@ -4,9 +4,11 @@ import UserForm from "@/components/UserForm";
 import RenderProperly from "@/components/RenderProperly";
 import validateMail from "@/util/validateMail";
 import validatePassword from "@/util/validatePassword";
-import { Box, Flex, Heading, useColorMode, useToast } from "@chakra-ui/react";
+import { Box, cookieStorageManager, Flex, Heading, useColorMode, useToast } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import Image from 'next/image';
+import qs from 'querystring'
+import { NextPageContext } from 'next';
 
 export default function userView() {
 
@@ -58,7 +60,7 @@ export default function userView() {
             })
         });
         const { accessToken, message } = await data.json();
-        if( !accessToken ){
+        if (!accessToken) {
             toast({
                 isClosable: true,
                 title: 'Failed to sign up',
@@ -66,7 +68,7 @@ export default function userView() {
                 status: "error",
                 description: message
             })
-        }else{
+        } else {
             toast({
                 isClosable: true,
                 title: 'Sign up succeded',
@@ -74,7 +76,7 @@ export default function userView() {
                 status: "success",
             })
             console.log(accessToken);
-        } 
+        }
     }
     // Register form ==============
 
@@ -92,7 +94,7 @@ export default function userView() {
             })
         });
         const { accessToken, message } = await data.json();
-        if( !accessToken ){
+        if (!accessToken) {
             toast({
                 isClosable: true,
                 title: 'Failed to sign in',
@@ -100,12 +102,12 @@ export default function userView() {
                 status: "error",
                 description: message
             })
-            if( message === 'Invalid password' ){
+            if (message === 'Invalid password') {
                 setIsError(true);
                 setformErrorMessage("Invalid Password")
                 passwordRef.current.value = ''
             }
-        }else{
+        } else {
             toast({
                 isClosable: true,
                 title: 'Login succeded',
@@ -170,11 +172,32 @@ export default function userView() {
     )
 }
 
-{/* <UserForm
-                isError={isError}
-                usernameRef={usernameRef}
-                passwordRef={passwordRef}
-                validateForm={validateForm}
-                registerUser={registerUser}
-                formErrorMessage={formErrorMessage}
-              /> */}
+export async function getServerSideProps({ req }) {
+
+    const view = req.url.split('/')[2]
+    if (view === 'login') {
+        const queryString = qs.decode(req.headers?.cookie, "; ");
+        const data = fetch('http://127.0.0.1:3000/api/user/checkauth', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "*"
+            },
+            body: JSON.stringify(queryString)
+        })
+        if ((await data).status === 200) {
+            console.log("redirect");
+        }
+        else if ((await data).status === 201) {
+            console.log("redirect to refresh");
+        }
+        else if ((await data).status !== 201 && (await data).status !== 200) {
+            console.log("Do nothing");
+        }
+    }
+
+
+    return {
+        props: {}
+    }
+}

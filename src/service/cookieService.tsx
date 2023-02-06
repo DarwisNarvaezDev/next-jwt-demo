@@ -1,7 +1,7 @@
 import { setAccessCookieExpiration, setRefreshCookieExpiration } from "@/util/ExpirationCalculator";
 import { deleteCookie, getCookies, setCookie } from "cookies-next";
 import { NextApiRequest, NextApiResponse } from "next";
-import { appToken } from "./tokenService";
+import { appToken, isValidAccessToken, isValidRefreshToken } from "./tokenService";
 
 const cookiesKeys = {
     refreshCookieKey: `${appToken}${'refreshToken'}`,
@@ -60,19 +60,23 @@ export function isRefreshTokenCookie(
     }
 }
 
-export function getValidTokenKeys(
-    cookiesKeysData: string[]
+export function getValidTokenCookies(
+    cookiesKeysData: any[]
 ){
     try {
-        let accessTokenKeys: any[] = []
-        let refreshTokenKeys: any[] = []
-        cookiesKeysData.forEach( key => {
-            if( key === cookiesKeys.accessCookieKey ) accessTokenKeys.push(key);
-            if( key === cookiesKeys.refreshCookieKey ) refreshTokenKeys.push(key);
+        let accessTokenCookies: any[] = []
+        let refreshTokenCookies: any[] = []
+        cookiesKeysData.forEach( line => {
+            if( line.key === cookiesKeys.accessCookieKey ){
+                accessTokenCookies.push(line)
+            }            
+            if( line.key === cookiesKeys.refreshCookieKey ){
+                refreshTokenCookies.push(line)
+            }
         })
         return {
-            keysOfAccessTokens: accessTokenKeys,
-            keysOfRefreshTokens: refreshTokenKeys
+            keysOfAccessTokens: accessTokenCookies,
+            keysOfRefreshTokens: refreshTokenCookies
         }
     } catch (error) {
         throw error;

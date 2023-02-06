@@ -23,7 +23,7 @@ export function createRefreshToken(userId: string){
     }
 }
 
-export function isValidAccessToken(accessToken: string){
+export function isValidAccessToken(accessToken: any){
     try{
         const validToken = jwt.verify(accessToken, appToken);
         if( validToken?.userEmail ){
