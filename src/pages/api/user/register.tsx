@@ -3,6 +3,8 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import {checkUser, saveUser} from '../../../service/userService';
 import { saveLoginData } from '@/service/loginService';
+import { createAccessToken, createRefreshToken } from '@/service/tokenService';
+import getBrowserCookiesKeys, { createAccessTokenCookie, createRefreshTokenCookie, getBrowserCookies } from '@/service/cookieService';
 
 export default async function handler(
   req: NextApiRequest,
@@ -24,13 +26,20 @@ export default async function handler(
           email: email, 
           joined: new Date(Date.UTC(96, 1, 2, 3, 4, 5)).toUTCString()
         })
+        const {
+          id: pUserId,
+          email: pUserEmail
+        } = user[0]
         // Persist in Login DB
         const login = await saveLoginData({ email: email, hash: hashedPassword});
         // Generate token
-        const appToken: string | any = process.env.APP_TOKEN
-        const accessToken = jwt.sign({ email }, appToken, {
-          expiresIn: "3000s",
-        });
+        const accessToken = createAccessToken(pUserEmail);
+        const refreshToken = createRefreshToken(pUserId);
+        // COOKIES
+        // createAccessTokenCookie(req, res, accessToken);
+        // createRefreshTokenCookie(req, res, refreshToken);
+        getBrowserCookiesKeys(getBrowserCookies(req, res))
+        // COOKIES
         // Response
         res.status(200).json({ accessToken: accessToken, message: null })
       }catch(error){
