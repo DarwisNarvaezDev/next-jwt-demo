@@ -33,7 +33,7 @@ export default function handler(
         if( tokens.keysOfRefreshTokens.length > 0 ){
             tokens.keysOfRefreshTokens.forEach( line =>{
                 if( isValidRefreshToken(line.value) ){
-                    res.status(204).json("Authorized, need new acces token");
+                    res.status(202).json("Authorized, need new acces token");
                 }else{
                     res.status(401).json("Unauthorized");
                 }

@@ -5,12 +5,14 @@ import RenderProperly from "@/components/RenderProperly";
 import validateMail from "@/util/validateMail";
 import validatePassword from "@/util/validatePassword";
 import { Box, cookieStorageManager, Flex, Heading, useColorMode, useToast } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from 'next/image';
 import qs from 'querystring'
-import { NextPageContext } from 'next';
+import { useRouter } from 'next/router';
 
 export default function userView() {
+
+    const router = useRouter();
 
     const { colorMode } = useColorMode();
     const [isError, setIsError] = useState(false);
@@ -119,6 +121,20 @@ export default function userView() {
     }
     // Login form ==============
 
+    useEffect(() => {
+        const { autherror, prevpage } = router.query;
+        if (autherror) {
+            toast({
+                isClosable: true,
+                title: 'Login succeded',
+                position: "top-right",
+                status: "error",
+                description: `You must be signed in to access "${prevpage}"`
+            })
+        }
+    }, [])
+
+
     return (
         <Box
             position={"relative"}
@@ -185,13 +201,14 @@ export async function getServerSideProps({ req }) {
             },
             body: JSON.stringify(queryString)
         })
-        if ((await data).status === 200) {
+        const status = (await data).status
+        if (status === 200) {
             console.log("redirect");
         }
-        else if ((await data).status === 201) {
+        else if (status === 202) {
             console.log("redirect to refresh");
         }
-        else if ((await data).status !== 201 && (await data).status !== 200) {
+        else if (status !== 202 && (await data).status !== 200) {
             console.log("Do nothing");
         }
     }

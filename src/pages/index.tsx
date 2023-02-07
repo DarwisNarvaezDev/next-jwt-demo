@@ -3,11 +3,12 @@ import Image from "next/image";
 import darkSvg from '/public/drk-indx-bg.svg'
 import brightSvg from '/public/brth-indx-bg.svg'
 import NextLink from 'next/link'
+import Router from "next/router";
 
 export default function Home() {
 
   const { colorMode } = useColorMode();
-
+  
   async function userCustoms(){
     // Get valid app tokens from cookie service
     
@@ -73,20 +74,22 @@ export default function Home() {
             >
               <Heading size={"sm"} mt={"10px"}>First you have to login!</Heading>
               <Button
-                as={NextLink}
-                href='/user/signup'
                 width={"95%"}
                 borderRadius={"5px"}
                 textAlign={"center"}
+                onClick={()=>{
+                  window.location.href = '/user/signup'
+                }}
               >
                 Sign Up | {`<App>/user/signup`}
               </Button>
               <Button
-                as={NextLink}
-                href='/user/login'
                 width={"95%"}
                 borderRadius={"5px"}
                 textAlign={"center"}
+                onClick={()=>{
+                  window.location.href = '/user/login'
+                }}
               >
                 Login | {`<App>/user/login`}
               </Button>
@@ -102,13 +105,12 @@ export default function Home() {
             >
               <Heading size={"sm"} mt={"10px"}>Unless you want to try breaching out!</Heading>
               <Button
-                // as={NextLink}
-                // href='/user/signup'
                 width={"95%"}
                 borderRadius={"5px"}
                 textAlign={"center"}
                 onClick={()=>{
                   userCustoms()
+                  window.location.href = '/user/usersonly'
                 }}
               >
                 Users Only Section | {`<App>/user/usersonly`}
