@@ -129,7 +129,7 @@ export default function userView() {
                 title: 'Login succeded',
                 position: "top-right",
                 status: "error",
-                description: `You must be signed in to access "${prevpage}"`
+                description: `You must be signed in to gain access`
             })
         }
     }, [])

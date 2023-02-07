@@ -13,8 +13,7 @@ export default function refresh({}: RefreshProps){
     if( data.ok ){
         window.location.replace("/user/usersonly")
     }else{
-        console.log("Redirect to login with message");
-        
+        window.location.replace('/user/login?autherror=true')
     }
   };
 

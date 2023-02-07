@@ -32,7 +32,7 @@ export default async function handler(
                         res.status(500).json("Invalid refresh token")
                     }
                 } else {
-                    // res.status(401).json("Unauthorized");
+                    res.status(401).json("Unauthorized");
                 }
             });
         }
@@ -44,7 +44,7 @@ export default async function handler(
             createAccessTokenCookie(req, res, newAccessToken);
             res.status(200).json("New access token created.")
         }
-        // res.status(200).json("Hello")
+        res.status(400).json("Unauthorized")
     } catch (error) {
         res.status(500).json("Hey")
     }
