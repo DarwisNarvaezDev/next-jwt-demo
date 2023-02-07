@@ -38,12 +38,13 @@ export function isValidAccessToken(accessToken: any){
 
 export function isValidRefreshToken(refreshToken: string){
     try{
-        const validToken = jwt.verify(refreshToken, appToken);
-        if( validToken?.userId ){
-            return true;
-        }else{
-            return false;
-        }
+        let valid = true
+        jwt.verify(refreshToken, appToken, (err, decoded) => {
+            if( err ){
+                valid = true
+            }
+        });
+        return valid
     }catch(error){
         throw error
     }
@@ -65,6 +66,22 @@ export function getValidTokens(tokensArray: string[]){
             refreshTokens: refreshTokenArray,
             accessTokens: accessTokenArray
         }
+    }catch(error){
+        throw error
+    }
+}
+
+export function getRefreshTokenData(refreshToken: string){
+    try{
+        let decodedUser = null
+        const validToken = jwt.verify(refreshToken, appToken, (err, decoded) => {
+            if( err ){
+                return false
+            }else{
+                decodedUser = decoded
+            }
+        });
+        return decodedUser
     }catch(error){
         throw error
     }

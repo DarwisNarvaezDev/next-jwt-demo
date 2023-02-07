@@ -205,12 +205,24 @@ export async function getServerSideProps({ req }) {
         if (status === 200) {
             console.log("redirect");
         }
+        else if( status === 500 ){
+            const error = await (await data).json()
+            if(error.name === 'TokenExpiredError'){
+                return {
+                    redirect: {
+                        permanent: false,
+                        destination: `/user/refresh`
+                    }
+                }
+            }
+        }
         else if (status === 202) {
             console.log("redirect to refresh");
         }
         else if (status !== 202 && (await data).status !== 200) {
             console.log("Do nothing");
         }
+        
     }
 
 
