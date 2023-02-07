@@ -31,13 +31,18 @@ export async function getServerSideProps({ req, res }) {
         })
         const status = (await data).status
         if (status === 200) {
-            console.log("redirect");
+            console.log("Do nothing");
         }
         else if (status === 202) {
             console.log("redirect to refresh");
         }
         else if (status !== 202 && (await data).status !== 200) {
-            console.log("Do nothing");
+            return {
+                redirect: {
+                    permanent: false,
+                    destination: `/user/login?autherror=true&prevpage=usersonly`
+                }
+            }
         }
     } else {
         return {
@@ -46,5 +51,9 @@ export async function getServerSideProps({ req, res }) {
                 destination: `/user/login?autherror=true&prevpage=usersonly`
             }
         }
+    }
+
+    return {
+        props: {}
     }
 }
