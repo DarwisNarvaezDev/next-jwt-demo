@@ -13,7 +13,7 @@ DB_PASSWORD=postgres
 APP_TOKEN=JwtNextDemo
 ```
 4. Execute the following command: ```npm i knex --save``` to install knex
-5. Run the knex.js migration script with: ```knex migrate:latest``` this will make your life easier by creating all the tables we need in the db if the credentials are correctly set in the .env file. If all goes well you'll see something like this:
+5. Run the knex.js migration script with: ```knex migrate:latest``` this will make your life easier by creating all the tables we need in the db if the credentials are correctly set in the ```.env``` file. If all goes well you'll see something like this:
 ```
 Using environment: development
 Batch 1 run: 2 migrations
