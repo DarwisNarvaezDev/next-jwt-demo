@@ -24,7 +24,7 @@ export default async function handler(
         // Persist in User DB
         const user: any = await saveUser({ 
           email: email, 
-          joined: new Date(Date.UTC(96, 1, 2, 3, 4, 5)).toUTCString()
+          joined: new Date().toLocaleString()
         })
         const {
           id: pUserId,

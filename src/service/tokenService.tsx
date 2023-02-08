@@ -87,3 +87,19 @@ export function getRefreshTokenData(refreshToken: string){
         throw error
     }
 }
+
+export function getAccessTokenData(accessToken: string){
+    try{
+        let decodedUser = null
+        const validToken = jwt.verify(accessToken, appToken, (err, decoded) => {
+            if( err ){
+                return false
+            }else{
+                decodedUser = decoded
+            }
+        });
+        return decodedUser
+    }catch(error){
+        throw error
+    }
+}
