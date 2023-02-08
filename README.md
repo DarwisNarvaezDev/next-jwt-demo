@@ -1,38 +1,21 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Simple JWT-Next.js Demo
+Deveolped with Next.js, Chakra U, Knex.Js, and Postgres Sql.
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+# To run it
+1. Deploy a postgresql instance
+2. Clone this repo and navigate to the downloaded folder
+3. Inside the folder, you have to create your ```.env```, with DB credentials and APP (fake) token, like so:
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+DB_URL=http://localhost:5432
+DB_BATABASE=postgres
+DB_USER=postgres
+DB_PASSWORD=postgres
+APP_TOKEN=JwtNextDemo
+```
+4. Execute the following command: ```npm i knex --save``` to install knex
+5. Run the knex.js migration script with: ```knex migrate:latest``` this will make your life easier by creating all the tables we need in the db if the credentials are correctly set in the .env file. If all goes well you'll see something like this:
+```
+Using environment: development
+Batch 1 run: 2 migrations
+``` 
+6. By running the following command: ```npm run dev``` to deploy the next.js app in your local server. :bowtie: enjoy!
