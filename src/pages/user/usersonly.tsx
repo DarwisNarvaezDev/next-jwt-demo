@@ -3,6 +3,7 @@ import { ExternalLinkIcon } from '@chakra-ui/icons'
 import qs from 'querystring'
 import Router from "next/router";
 import { json } from "stream/consumers";
+import { useEffect } from "react";
 
 export default function () {
 
@@ -13,6 +14,20 @@ export default function () {
             window.location.replace('/')
         }        
     }
+
+    useEffect(() => {
+        document.title = "Users Area | JWT Demo"
+        let flag = false
+        setInterval(()=>{
+          if( !flag ){
+            document.title = "Users Area | JWT Demo"
+            flag = !flag
+          }else{
+            document.title = "VIP's only!"
+            flag = !flag
+          }
+        }, 3000)
+      }, [])
 
     return (
         <>

@@ -2,12 +2,26 @@ import { BreadcrumbSeparator, Button, Flex, Heading, Link, Text, useColorMode } 
 import Image from "next/image";
 import darkSvg from '/public/drk-indx-bg.svg'
 import brightSvg from '/public/brth-indx-bg.svg'
-import NextLink from 'next/link'
-import Router from "next/router";
+import { useEffect } from "react";
 
 export default function Home() {
 
   const { colorMode } = useColorMode();
+
+  useEffect(() => {
+    document.title = "Home | JWT Demo"
+    let flag = false
+    setInterval(()=>{
+      if( !flag ){
+        document.title = "Home | JWT Demo"
+        flag = !flag
+      }else{
+        document.title = "Sign up!"
+        flag = !flag
+      }
+    }, 3000)
+  }, [])
+  
 
   return (
     <>

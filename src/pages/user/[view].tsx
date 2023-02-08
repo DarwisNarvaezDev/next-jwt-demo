@@ -10,7 +10,7 @@ import Image from 'next/image';
 import qs from 'querystring'
 import { useRouter } from 'next/router';
 
-export default function userView() {
+export default function userView({ documentTitle }) {
 
     const router = useRouter();
 
@@ -128,11 +128,24 @@ export default function userView() {
         if (autherror) {
             toast({
                 isClosable: true,
-                title: 'Login succeded',
+                title: 'Authentication Error',
                 position: "top-right",
                 status: "error",
                 description: `You must be signed in to gain access`
             })
+        }
+        let flag = false
+        if (documentTitle !== null) {
+            document.title = `${documentTitle} | JWT Demo`
+            setInterval(() => {
+                if (!flag) {
+                    document.title = `${documentTitle} | JWT Demo`
+                    flag = !flag
+                } else {
+                    document.title = `${documentTitle}!`
+                    flag = !flag
+                }
+            }, 3000)
         }
     }, [])
 
@@ -192,8 +205,10 @@ export default function userView() {
 
 export async function getServerSideProps({ req }) {
 
+    let documentTitle = 'Login';
     const view = req.url.split('/')[2]
     if (view === 'login') {
+        documentTitle = 'Login'
         const queryString = qs.decode(req.headers?.cookie, "; ");
         const data = fetch('http://127.0.0.1:3000/api/user/checkauth', {
             method: 'POST',
@@ -232,10 +247,12 @@ export async function getServerSideProps({ req }) {
             }
         }
 
+    } else {
+        documentTitle = "Sign-up"
     }
 
 
     return {
-        props: {}
+        props: { documentTitle: documentTitle }
     }
 }
