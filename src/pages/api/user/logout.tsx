@@ -1,8 +1,7 @@
-import deleteBrowserCookies, { getValidTokenCookies } from "@/service/cookieService";
+import { getValidTokenCookies } from "@/service/cookieService";
 import { isValidAccessToken, isValidRefreshToken } from "@/service/tokenService";
 import { deleteCookie, getCookies } from "cookies-next";
 import { NextApiRequest, NextApiResponse } from "next";
-import { getCookieParser } from "next/dist/server/api-utils";
 
 export default async function handler(
     req: NextApiRequest,

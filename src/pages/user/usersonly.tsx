@@ -1,8 +1,6 @@
 import { Button, Flex, Heading, IconButton, Link, List, ListItem, Text } from "@chakra-ui/react";
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 import qs from 'querystring'
-import Router from "next/router";
-import { json } from "stream/consumers";
 import { useEffect } from "react";
 
 export default function () {

@@ -4,7 +4,7 @@ import UserForm from "@/components/UserForm";
 import RenderProperly from "@/components/RenderProperly";
 import validateMail from "@/util/validateMail";
 import validatePassword from "@/util/validatePassword";
-import { Box, cookieStorageManager, Flex, Heading, useColorMode, useToast } from "@chakra-ui/react";
+import { Box, Flex, useColorMode, useToast } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import Image from 'next/image';
 import qs from 'querystring'

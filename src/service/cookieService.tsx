@@ -1,7 +1,7 @@
 import { setAccessCookieExpiration, setRefreshCookieExpiration } from "@/util/ExpirationCalculator";
 import { deleteCookie, getCookies, setCookie } from "cookies-next";
 import { NextApiRequest, NextApiResponse } from "next";
-import { appToken, isValidAccessToken, isValidRefreshToken } from "./tokenService";
+import { appToken } from "./tokenService";
 
 const cookiesKeys = {
     refreshCookieKey: `${appToken}${'refreshToken'}`,

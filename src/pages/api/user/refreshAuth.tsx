@@ -1,6 +1,6 @@
 import { createAccessTokenCookie, getValidTokenCookies } from "@/service/cookieService";
 import { createAccessToken, getRefreshTokenData, isValidAccessToken, isValidRefreshToken } from "@/service/tokenService";
-import { findUser, findUserById } from "@/service/userService";
+import { findUserById } from "@/service/userService";
 import { getCookies } from "cookies-next";
 import { NextApiRequest, NextApiResponse } from "next";
 

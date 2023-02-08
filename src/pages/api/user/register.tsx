@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 import {checkUser, saveUser} from '../../../service/userService';
 import { saveLoginData } from '@/service/loginService';
 import { createAccessToken, createRefreshToken } from '@/service/tokenService';
-import deleteBrowserCookiesKeys, { createAccessTokenCookie, createRefreshTokenCookie, getBrowserCookies, getBrowserCookiesKeys } from '@/service/cookieService';
+import { createAccessTokenCookie, createRefreshTokenCookie, getBrowserCookies, getBrowserCookiesKeys } from '@/service/cookieService';
 import deleteBrowserCookies from '@/service/cookieService';
 
 export default async function handler(

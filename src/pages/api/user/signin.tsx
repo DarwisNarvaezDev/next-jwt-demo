@@ -1,8 +1,8 @@
-import { checkUser, findUser } from "@/service/userService";
+import { checkUser } from "@/service/userService";
 import { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { createAccessToken, createRefreshToken, isValidRefreshToken } from "@/service/tokenService";
+import { createRefreshToken } from "@/service/tokenService";
 import { findLoginData, saveNewRefreshToken } from "@/service/loginService";
 import { createAccessTokenCookie, createRefreshTokenCookie } from "@/service/cookieService";
 

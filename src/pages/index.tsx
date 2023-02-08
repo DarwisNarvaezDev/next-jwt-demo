@@ -1,4 +1,4 @@
-import { BreadcrumbSeparator, Button, Flex, Heading, Link, Text, useColorMode } from "@chakra-ui/react";
+import { Button, Flex, Heading, Text, useColorMode } from "@chakra-ui/react";
 import Image from "next/image";
 import darkSvg from '/public/drk-indx-bg.svg'
 import brightSvg from '/public/brth-indx-bg.svg'
