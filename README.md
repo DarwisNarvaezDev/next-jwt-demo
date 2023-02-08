@@ -17,5 +17,6 @@ APP_TOKEN=JwtNextDemo
 ```
 Using environment: development
 Batch 1 run: 2 migrations
-``` 
+```
+7. Run ```npm install``` to install the needed dependencies and finally 
 6. By running the following command: ```npm run dev``` to deploy the next.js app in your local server. :bowtie: enjoy!
