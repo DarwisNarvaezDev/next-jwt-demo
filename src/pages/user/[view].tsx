@@ -204,8 +204,6 @@ export async function getServerSideProps({ req }) {
             body: JSON.stringify(queryString)
         })
         const status = (await data).status
-        console.log(status);
-        
         if (status === 200) {
             return {
                 redirect: {
@@ -232,9 +230,6 @@ export async function getServerSideProps({ req }) {
                     destination: `/user/refresh`
                 }
             }
-        }
-        else if (status !== 202 && (await data).status !== 200) {
-            console.log("Do nothing");
         }
 
     }

@@ -90,7 +90,6 @@ export function deleteCookies(
 ){
     try {
         keys.forEach( key =>{
-            // console.log(`Key to delete: ${JSON.stringify(key)}`);
             deleteCookie(key, {req, res})
         })
     } catch (error) {

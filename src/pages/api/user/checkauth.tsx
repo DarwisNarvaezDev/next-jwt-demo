@@ -43,10 +43,7 @@ export default function handler(
                 res.status(401).json("Unauthorized");
             }
         }
-        res.status(401).json("Unauthorized");
     } catch (error) {
         res.status(500).json(error)
     }
-
-    res.status(401).json("Unauthorized");
 }

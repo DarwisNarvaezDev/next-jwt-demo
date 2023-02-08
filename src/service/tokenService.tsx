@@ -25,8 +25,6 @@ export function createRefreshToken(userId: string){
 
 export function isValidAccessToken(accessToken: any){
     try{
-        console.log("hey");
-        
         let valid = true
         jwt.verify(accessToken, appToken, (err, decoded) => {
             if( !err ){

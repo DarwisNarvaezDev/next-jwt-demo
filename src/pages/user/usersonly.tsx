@@ -20,10 +20,9 @@ export default function () {
                 width={"100%"}
                 height={"100vh"}
                 justifyContent={"center"}
-                alignItems={"center"}
-
             >
                 <Flex
+                    mt={"4rem"}
                     width={"40%"}
                     height={"60%"}
                     p={"2rem"}
@@ -31,20 +30,21 @@ export default function () {
                     borderRadius={"15px"}
                     flexDir={"column"}
                     gap={5}
+                    boxShadow={"2xl"}
                 >
-                    <Heading>You gained access!</Heading>
-                    <Heading ml={"1rem"} size={"md"}>Now you can...</Heading>
+                    <Heading>You gained access! 🤘</Heading>
+                    <Heading ml={"5px"} size={"md"} fontWeight={"light"}>Now you can... 🥁</Heading>
                     <List
-                        mt={"2rem"}
+                        mt={"1rem"}
                         ml={"1rem"}
                         spacing={8}
                     >
                         <ListItem>
-                            <Link href='https://github.com/DarwisNarvaezDev' isExternal>
+                            <Link fontSize={"2xl"} href='https://github.com/DarwisNarvaezDev' isExternal>
                                 Follow the developer in GH <ExternalLinkIcon mx='2px' />
                             </Link>
                         </ListItem>
-                        <ListItem>
+                        <ListItem fontSize={"2xl"}>
                             Or <Button 
                                 ml={"10px"}
                                 onClick={()=>{
@@ -73,10 +73,7 @@ export async function getServerSideProps({ req, res }) {
             body: JSON.stringify(queryString)
         })
         const status = (await data).status
-        if (status === 200) {
-            console.log("Do nothing");
-        }
-        else if (status === 202) {
+        if (status === 202) {
             return {
                 redirect: {
                     permanent: false,

@@ -18,7 +18,6 @@ export default async function handler(
             arr.push({ key: line[0], value: line[1] })
         })
         const tokens = getValidTokenCookies(arr);
-        // console.log(tokens);
         if (tokens.keysOfRefreshTokens.length > 0) {
             tokens.keysOfRefreshTokens.forEach(line => {
                 if (isValidRefreshToken(line.value)) {
