@@ -6,8 +6,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
-) {
-    
+){
+    const { deleteRefresh, deleteAccess } = req.body;
+    console.log(`ref: ${deleteRefresh} | accss: ${deleteAccess}`);
+
     const cookies = getCookies({ req, res });
     let arr = []
     let user: null | number = null
@@ -19,20 +21,23 @@ export default async function handler(
         const tokens = getValidTokenCookies(arr);
         
         if (tokens.keysOfRefreshTokens.length > 0 || tokens.keysOfAccessTokens.length > 0) {
-            tokens.keysOfRefreshTokens.forEach(line => {
-                if (isValidRefreshToken(line.value)) {
-                    deleteCookie(line.key, {req, res})
-                }
-            });
-            tokens.keysOfAccessTokens.forEach(line => {
-                if (isValidAccessToken(line.value)) {
-                    deleteCookie(line.key, {req, res})
-                }
-            });
+            if( deleteAccess !== undefined ){
+                tokens.keysOfAccessTokens.forEach(line => {
+                    if (isValidAccessToken(line.value)) {
+                        deleteCookie(line.key, {req, res})
+                    }
+                });
+            }
+            if( deleteRefresh !== undefined ){
+                tokens.keysOfRefreshTokens.forEach(line => {
+                    if (isValidRefreshToken(line.value)) {
+                        deleteCookie(line.key, {req, res})
+                    }
+                });
+            }
             res.status(200).json("Listo")
         }
 } catch (error) {
     res.status(500).json(JSON.stringify(error))
 }
-
 }

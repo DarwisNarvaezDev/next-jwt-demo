@@ -22,6 +22,20 @@ export default function () {
         }
     }
 
+    async function deleteAccessOrRefresh(key) {
+        const data = await fetch('/api/user/revoketoken', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept":"*"
+            }, body: JSON.stringify(key)
+        });
+        const json = await data.json();
+        if (data.ok) {
+            window.location.reload()
+        }
+    }
+
     async function getAuthData() {
         const data = await fetch('/api/user/getsessiondata');
         const json = await data.json();
@@ -133,7 +147,13 @@ export default function () {
                                                     <Text
                                                     fontWeight={"thin"}
                                                     mb={"20px"}
-                                                    ><strong>{line.key}</strong>: {`${line.value}`}</Text>
+                                                    ><strong>{line.key} {line.button && (<Button onClick={()=>{
+                                                        if( line.value.includes('Access') ){
+                                                            deleteAccessOrRefresh({ deleteRefresh: true })
+                                                        }else{
+                                                            deleteAccessOrRefresh({ deleteAccess: true })
+                                                        }
+                                                    }} bg={"red"} color={"black"} size={"xs"}>Revoke</Button>)} </strong>: {`${line.value}`}</Text>
                                                 </Flex>
                                             </Flex>
                                         )

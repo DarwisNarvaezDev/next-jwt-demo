@@ -24,10 +24,10 @@ export default async function handler(
                     const data = getAccessTokenData(line.value);
                     const { userId } = data;
                     user = userId;                    
-                    responseList.push({ key: "Access Token", value: line.value})
+                    responseList.push({ key: "Access Token", value: line.value , button: true})
                 }
                 if (isValidRefreshToken(line.value)) {
-                    responseList.push({ key: "Refresh Token", value: line.value})
+                    responseList.push({ key: "Refresh Token", value: line.value, button: true})
                 }
             });
             if( user !== null ){
