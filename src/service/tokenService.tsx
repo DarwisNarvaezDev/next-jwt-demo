@@ -25,12 +25,15 @@ export function createRefreshToken(userId: string){
 
 export function isValidAccessToken(accessToken: any){
     try{
-        const validToken = jwt.verify(accessToken, appToken);
-        if( validToken?.userEmail ){
-            return true;
-        }else{
-            return false;
-        }
+        console.log("hey");
+        
+        let valid = true
+        jwt.verify(accessToken, appToken, (err, decoded) => {
+            if( !err ){
+                valid = true
+            }
+        });
+        return valid
     }catch(error){
         throw error
     }
@@ -40,7 +43,7 @@ export function isValidRefreshToken(refreshToken: string){
     try{
         let valid = true
         jwt.verify(refreshToken, appToken, (err, decoded) => {
-            if( err ){
+            if( !err ){
                 valid = true
             }
         });

@@ -1,12 +1,6 @@
-import { Heading } from "@chakra-ui/react";
-import Router from "next/router";
 import { useEffect } from "react";
 
-export interface RefreshProps {
-
-}
-
-export default function refresh({}: RefreshProps){
+export default function refresh(){
   
   const doTokenRefresh = async () =>{
     const data = await fetch('/api/user/refreshAuth');
@@ -21,10 +15,8 @@ export default function refresh({}: RefreshProps){
     doTokenRefresh()
   }, [])
   
-  
     return (
     <>
-        <Heading>This is refresh page</Heading>
     </>
   )
 }

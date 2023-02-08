@@ -8,22 +8,6 @@ import Router from "next/router";
 export default function Home() {
 
   const { colorMode } = useColorMode();
-  
-  async function userCustoms(){
-    // Get valid app tokens from cookie service
-    
-    // Get authorization for user
-    const data = await fetch('/api/user/checkauth', {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    });
-    const json = await data.json();
-    
-    
-  }
 
   return (
     <>
@@ -45,77 +29,88 @@ export default function Home() {
         </Flex>
         <Flex
           height={"100%"}
-          w={"40%"}
+          w={"45%"}
           p={"5rem"}
           flexDir={"column"}
           position={'absolute'}
           zIndex={99999}
         >
-          <Heading>Welcome to JWT Demo</Heading>
-          <Heading
-            color={"gray.300"}
-            size={"2xl"}
-          > with Next.js</Heading>
           <Flex
-            mt={"2rem"}
-            gap={10}
             flexDir={"column"}
-            height={"80%"}
+            width={"100%"}
           >
-            <Text fontWeight={"black"}>Please go to the routes and start demoing away!</Text>
+            <Heading>Welcome to JWT Demo</Heading>
+            <Heading
+              color={"gray.300"}
+              size={"2xl"}
+            > with Next.js</Heading>
             <Flex
-              width={"100%"}
-              height={"40%"}
+              mt={"2rem"}
+              gap={10}
               flexDir={"column"}
-              pl={"1rem"}
-              gap={8}
-              borderRadius={"15px"}
-              border={"1px solid gray"}
+              height={"80%"}
             >
-              <Heading size={"sm"} mt={"10px"}>First you have to login!</Heading>
-              <Button
-                width={"95%"}
-                borderRadius={"5px"}
-                textAlign={"center"}
-                onClick={()=>{
-                  window.location.href = '/user/signup'
-                }}
+              <Text fontWeight={"black"} fontSize={"lg"}>Please go to the routes and start demoing away!</Text>
+              <Flex
+                width={"80%"}
+                flexDir={"column"}
+                gap={6}
+                borderRadius={"15px"}
+                border={"1px solid gray"}
+                justifyContent={"space-around"}
+                alignItems={"center"}
+                pt={"1rem"}
+                pb={"1rem"}
               >
-                Sign Up | {`<App>/user/signup`}
-              </Button>
-              <Button
-                width={"95%"}
-                borderRadius={"5px"}
-                textAlign={"center"}
-                onClick={()=>{
-                  window.location.href = '/user/login'
-                }}
+                <Heading size={"md"} mt={"10px"}>First you have to login!</Heading>
+                <Button
+                  size={"md"}
+                  borderRadius={"5px"}
+                  textAlign={"center"}
+                  onClick={() => {
+                    window.location.href = '/user/signup'
+                  }}
+                >
+                  Sign Up | {`<App>/user/signup`}
+                </Button>
+                <Button
+                  size={"md"}
+                  borderRadius={"5px"}
+                  textAlign={"center"}
+                  onClick={() => {
+                    window.location.href = '/user/login'
+                  }}
+                >
+                  Login | {`<App>/user/login`}
+                </Button>
+              </Flex>
+              <Flex
+                width={"80%"}
+                flexDir={"column"}
+                gap={6}
+                borderRadius={"15px"}
+                border={"1px solid gray"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                wordBreak={"break-all"}
+                pt={"1rem"}
+                pb={"1rem"}
               >
-                Login | {`<App>/user/login`}
-              </Button>
+                <Heading size={"md"} mt={"10px"}>Unless you want to try breaching out!</Heading>
+                <Button
+                  size={"md"}
+                  borderRadius={"5px"}
+                  textAlign={"center"}
+                  overflowWrap={"break-word"}
+                  onClick={() => {
+                    window.location.href = '/user/usersonly'
+                  }}
+                >
+                  Users Only Section | {`<App>/user/usersonly`}
+                </Button>
+              </Flex>
             </Flex>
-            <Flex
-              width={"100%"}
-              height={"25%"}
-              flexDir={"column"}
-              pl={"1rem"}
-              gap={8}
-              borderRadius={"15px"}
-              border={"1px solid gray"}
-            >
-              <Heading size={"sm"} mt={"10px"}>Unless you want to try breaching out!</Heading>
-              <Button
-                width={"95%"}
-                borderRadius={"5px"}
-                textAlign={"center"}
-                onClick={()=>{
-                  userCustoms()
-                  window.location.href = '/user/usersonly'
-                }}
-              >
-                Users Only Section | {`<App>/user/usersonly`}
-              </Button>
-            </Flex>
+
           </Flex>
         </Flex>
       </Flex>

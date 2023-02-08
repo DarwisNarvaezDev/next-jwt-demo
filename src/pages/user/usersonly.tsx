@@ -1,17 +1,60 @@
-import { Heading } from "@chakra-ui/react";
+import { Button, Flex, Heading, IconButton, Link, List, ListItem, Text } from "@chakra-ui/react";
+import { ExternalLinkIcon } from '@chakra-ui/icons'
 import qs from 'querystring'
 import Router from "next/router";
+import { json } from "stream/consumers";
 
+export default function () {
 
-export interface UsersOnlyProps {
-
-}
-
-export default function ({ }: UsersOnlyProps) {
+    async function logout(){
+        const data = await fetch('/api/user/logout');
+        const json = await data.json();
+        if( data.ok ){
+            window.location.replace('/')
+        }        
+    }
 
     return (
         <>
-            <Heading>Only users can see this</Heading>
+            <Flex
+                width={"100%"}
+                height={"100vh"}
+                justifyContent={"center"}
+                alignItems={"center"}
+
+            >
+                <Flex
+                    width={"40%"}
+                    height={"60%"}
+                    p={"2rem"}
+                    border={"1px solid gray"}
+                    borderRadius={"15px"}
+                    flexDir={"column"}
+                    gap={5}
+                >
+                    <Heading>You gained access!</Heading>
+                    <Heading ml={"1rem"} size={"md"}>Now you can...</Heading>
+                    <List
+                        mt={"2rem"}
+                        ml={"1rem"}
+                        spacing={8}
+                    >
+                        <ListItem>
+                            <Link href='https://github.com/DarwisNarvaezDev' isExternal>
+                                Follow the developer in GH <ExternalLinkIcon mx='2px' />
+                            </Link>
+                        </ListItem>
+                        <ListItem>
+                            Or <Button 
+                                ml={"10px"}
+                                onClick={()=>{
+                                    logout()
+                                }}
+                                >Log Out</Button>
+                        </ListItem>
+                    </List>
+                </Flex>
+            </Flex>
         </>
     )
 }
@@ -34,7 +77,12 @@ export async function getServerSideProps({ req, res }) {
             console.log("Do nothing");
         }
         else if (status === 202) {
-            console.log("redirect to refresh");
+            return {
+                redirect: {
+                    permanent: false,
+                    destination: `/user/refresh`
+                }
+            }
         }
         else if (status !== 202 && (await data).status !== 200) {
             return {

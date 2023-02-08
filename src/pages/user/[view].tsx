@@ -77,7 +77,8 @@ export default function userView() {
                 position: "top-right",
                 status: "success",
             })
-            console.log(accessToken);
+            // Redirect to usersonly
+            window.location.replace('/user/usersonly')
         }
     }
     // Register form ==============
@@ -116,7 +117,8 @@ export default function userView() {
                 position: "top-right",
                 status: "success",
             })
-            console.log(accessToken);
+            // Login succeds
+            window.location.replace('/user/usersonly')
         }
     }
     // Login form ==============
@@ -202,12 +204,19 @@ export async function getServerSideProps({ req }) {
             body: JSON.stringify(queryString)
         })
         const status = (await data).status
+        console.log(status);
+        
         if (status === 200) {
-            console.log("redirect");
+            return {
+                redirect: {
+                    permanent: false,
+                    destination: `/user/usersonly`
+                }
+            }
         }
-        else if( status === 500 ){
+        else if (status === 500) {
             const error = await (await data).json()
-            if(error.name === 'TokenExpiredError'){
+            if (error.name === 'TokenExpiredError') {
                 return {
                     redirect: {
                         permanent: false,
@@ -217,12 +226,17 @@ export async function getServerSideProps({ req }) {
             }
         }
         else if (status === 202) {
-            console.log("redirect to refresh");
+            return {
+                redirect: {
+                    permanent: false,
+                    destination: `/user/refresh`
+                }
+            }
         }
         else if (status !== 202 && (await data).status !== 200) {
             console.log("Do nothing");
         }
-        
+
     }
 
 
