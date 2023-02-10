@@ -39,8 +39,9 @@ export default function Home() {
         position={"relative"}
         >
         <Flex
-          width={"100%"}
+          width={["100%"]}
           height={"100%"}
+          visibility={['hidden', 'visible', 'visible']}
           position={"absolute"}
           justifyContent={"flex-end"}
           zIndex={99}
