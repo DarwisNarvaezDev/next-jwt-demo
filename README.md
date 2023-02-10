@@ -6,11 +6,12 @@ Deveolped with Next.js, Chakra U, Knex.Js, and Postgres Sql.
 2. Clone this repo and navigate to the downloaded folder
 3. Inside the folder, you have to create your ```.env```, with DB credentials and APP (fake) token, like so:
 ```
-DB_URL=http://localhost:5432
 DB_BATABASE=postgres
 DB_USER=postgres
 DB_PASSWORD=postgres
-APP_TOKEN=JwtNextDemo
+DB_HOST=127.0.0.1
+DB_PORT=5432
+APP_TOKEN=yourAppTokenHere
 ```
 4. Execute the following command: ```npm i knex --save``` to install knex
 5. Run the knex.js migration script with: ```knex migrate:latest``` this will make your life easier by creating all the tables we need in the db if the credentials are correctly set in the ```.env``` file. If all goes well you'll see something like this:
