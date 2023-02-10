@@ -128,7 +128,7 @@ export default function Home() {
                 </Flex>
               </Flex>
               <Flex
-                width={"100%"}
+                width={Theme.buttonContainer.dimentions}
                 flexDir={"column"}
                 gap={6}
                 borderRadius={"15px"}
