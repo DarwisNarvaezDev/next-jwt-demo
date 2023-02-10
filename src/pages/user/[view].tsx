@@ -4,7 +4,7 @@ import UserForm from "@/components/UserForm";
 import RenderProperly from "@/components/RenderProperly";
 import validateMail from "@/util/validateMail";
 import validatePassword from "@/util/validatePassword";
-import { Box, Flex, Th, useColorMode, useToast } from "@chakra-ui/react";
+import { Box, Flex, Th, useBreakpointValue, useColorMode, useToast } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import Image from 'next/image';
 import qs from 'querystring'
@@ -28,7 +28,7 @@ export default function userView({ documentTitle }) {
             toast({
                 isClosable: true,
                 title: 'Failed to sign up',
-                position: "top-right",
+                position: 'bottom',
                 status: "error",
                 description: "An email and a password must be submitted."
             })
@@ -67,7 +67,7 @@ export default function userView({ documentTitle }) {
             toast({
                 isClosable: true,
                 title: 'Failed to sign up',
-                position: "top-right",
+                position: 'bottom',
                 status: "error",
                 description: message
             })
@@ -75,7 +75,7 @@ export default function userView({ documentTitle }) {
             toast({
                 isClosable: true,
                 title: 'Sign up succeded',
-                position: "top-right",
+                position: 'bottom',
                 status: "success",
             })
             // Redirect to usersonly
@@ -102,7 +102,7 @@ export default function userView({ documentTitle }) {
             toast({
                 isClosable: true,
                 title: 'Failed to sign in',
-                position: "top-right",
+                position: 'bottom',
                 status: "error",
                 description: message
             })
@@ -115,7 +115,7 @@ export default function userView({ documentTitle }) {
             toast({
                 isClosable: true,
                 title: 'Login succeded',
-                position: "top-right",
+                position: 'bottom',
                 status: "success",
             })
             // Login succeds
@@ -130,7 +130,7 @@ export default function userView({ documentTitle }) {
             toast({
                 isClosable: true,
                 title: 'Authentication Error',
-                position: "top-right",
+                position: 'bottom',
                 status: "error",
                 description: `You must be signed in to gain access`
             })
