@@ -105,6 +105,7 @@ export default function Home() {
                   justifyContent={"center"}
                   bg={"gray.200"}
                   p={Theme.buttonContainer.buttons.padding}
+                  cursor={Theme.buttonContainer.buttons.cursor}
                   fontWeight={Theme.buttonContainer.buttons.fontWeight}
                   onClick={()=>{
                     window.location.href = '/user/signup'
@@ -116,6 +117,7 @@ export default function Home() {
                   id="loginButton"
                   width={Theme.buttonContainer.buttons.width}
                   borderRadius={Theme.buttonContainer.buttons.borderRadius}
+                  cursor={Theme.buttonContainer.buttons.cursor}
                   textAlign={"center"}
                   justifyContent={"center"}
                   bg={"gray.200"}
@@ -154,6 +156,7 @@ export default function Home() {
                   justifyContent={"center"}
                   p={Theme.buttonContainer.buttons.padding}
                   fontWeight={Theme.buttonContainer.buttons.fontWeight}
+                  cursor={Theme.buttonContainer.buttons.cursor}
                   onClick={()=>{
                     window.location.href = '/user/usersonly'
                   }}

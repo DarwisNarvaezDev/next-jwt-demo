@@ -14,7 +14,7 @@ export default function RenderProperly ({ id, component }: RenderProperlyProps){
     height={"100%"}
     width={"100%"}
     pt={"1rem"}
-    p={"3rem"}
+    p={"2rem"}
     >
         <>{component}</>
     </Flex>

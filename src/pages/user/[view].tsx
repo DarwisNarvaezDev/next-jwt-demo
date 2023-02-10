@@ -4,11 +4,12 @@ import UserForm from "@/components/UserForm";
 import RenderProperly from "@/components/RenderProperly";
 import validateMail from "@/util/validateMail";
 import validatePassword from "@/util/validatePassword";
-import { Box, Flex, useColorMode, useToast } from "@chakra-ui/react";
+import { Box, Flex, Th, useColorMode, useToast } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import Image from 'next/image';
 import qs from 'querystring'
 import { useRouter } from 'next/router';
+import Theme from '@/util/Theme';
 
 export default function userView({ documentTitle }) {
 
@@ -172,8 +173,8 @@ export default function userView({ documentTitle }) {
                 position={"absolute"}
             >
                 <Flex
-                    width={"50vh"}
-                    height={"60vh"}
+                    width={Theme.form.wrapper.dimentions}
+                    height={Theme.form.wrapper.height}
                     mt={"3rem"}
                     borderRadius={"10px"}
                     justifyContent={"center"}

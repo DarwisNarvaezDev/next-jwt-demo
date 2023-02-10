@@ -18,6 +18,13 @@ export default {
             borderRadius: ['10px', '10px', '10px'],
             padding: ['1rem', '1rem', '1rem'],
             fontWeight: ['semibold', 'semibold', 'semibold'],
+            cursor: "pointer"
+        }
+    },
+    form: {
+        wrapper: {
+        dimentions: ['80%', '50vh', '55vh'],
+        height: ['50%', '60vh', '70vh']
         }
     }
 }
