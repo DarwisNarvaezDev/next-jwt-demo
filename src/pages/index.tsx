@@ -76,7 +76,7 @@ export default function Home() {
               alignItems={"center"}
             >
               <Flex
-                width={"80%"}
+                width={Theme.appHeaderContainer.secondaryTextDimentions}
               >
               <Text 
                 fontWeight={Theme.appHeaderContainer.fontWeight}
@@ -101,6 +101,7 @@ export default function Home() {
                   width={Theme.buttonContainer.buttons.width}
                   borderRadius={Theme.buttonContainer.buttons.borderRadius}
                   textAlign={"center"}
+                  justifyContent={"center"}
                   bg={"gray.200"}
                   p={Theme.buttonContainer.buttons.padding}
                   fontWeight={Theme.buttonContainer.buttons.fontWeight}
@@ -115,6 +116,7 @@ export default function Home() {
                   width={Theme.buttonContainer.buttons.width}
                   borderRadius={Theme.buttonContainer.buttons.borderRadius}
                   textAlign={"center"}
+                  justifyContent={"center"}
                   bg={"gray.200"}
                   p={Theme.buttonContainer.buttons.padding}
                   fontWeight={Theme.buttonContainer.buttons.fontWeight}
@@ -126,7 +128,7 @@ export default function Home() {
                 </Flex>
               </Flex>
               <Flex
-                width={"80%"}
+                width={"100%"}
                 flexDir={"column"}
                 gap={6}
                 borderRadius={"15px"}
@@ -134,6 +136,7 @@ export default function Home() {
                 justifyContent={"center"}
                 alignItems={"center"}
                 wordBreak={"break-all"}
+                textAlign={"center"}
                 pt={"1rem"}
                 pb={"1rem"}
               >
@@ -146,8 +149,8 @@ export default function Home() {
                   id="usersOnlyButton"
                   width={Theme.buttonContainer.buttons.width}
                   borderRadius={Theme.buttonContainer.buttons.borderRadius}
-                  textAlign={"center"}
                   bg={"gray.200"}
+                  justifyContent={"center"}
                   p={Theme.buttonContainer.buttons.padding}
                   fontWeight={Theme.buttonContainer.buttons.fontWeight}
                   onClick={()=>{

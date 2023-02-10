@@ -6,6 +6,7 @@ export default {
     },
     appHeaderContainer: {
         mainHeading: ['2xl', '2xl', '2xl'],
+        secondaryTextDimentions: ["80%", "100%", "100%"],
         secondaryHeading: ['2xl', '2xl', '2xl'],
         secondaryText: ['lg', '2xl', '2xl'],
         fontWeight: ['medium', 'black', 'black']
