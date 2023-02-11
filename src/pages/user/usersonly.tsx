@@ -2,6 +2,7 @@ import { Button, Flex, Heading, IconButton, Link, List, ListItem, Text, useColor
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 import qs from 'querystring'
 import { useEffect, useState } from "react";
+import Theme from "@/util/Theme";
 
 export default function () {
 
@@ -61,21 +62,24 @@ export default function () {
         <>
             <Flex
                 width={"100%"}
-                height={"100vh"}
+                height={"100%"}
                 justifyContent={"center"}
+                mb={"3rem"}
             >
                 <Flex
                     mt={"4rem"}
-                    width={"50%"}
+                    width={Theme.usersOnly.container.dimentions}
                     height={"80%"}
                     border={"1px solid gray"}
                     borderRadius={"15px"}
                     gap={5}
                     boxShadow={"2xl"}
+                    flexDir={Theme.usersOnly.container.flexDirection}
                     >
                     <Flex
                         flexDir={"column"}
                         p={"2rem"}
+                        
                         >
                         <Heading size={"lg"}>You gained access! 🤘</Heading>
                         <Heading ml={"5px"} size={"md"} fontWeight={"light"} mt={"20px"}>Now you can... 🥁</Heading>
@@ -87,9 +91,10 @@ export default function () {
                             height={"100%"}
                             mt={"10px"}
                             justifyContent={"center"}
-                            bg={"gray.900"}
                             alignItems={"center"}
-
+                            mt={"1rem"}
+                            paddingTop={"1rem"}
+                            paddingBottom={"1rem"}
                             gap={8}
                         >
                             <Button 
@@ -107,10 +112,9 @@ export default function () {
                         </Flex>
                     </Flex>
                     <Flex
-                        height={"100%"}
-                        width={"50%"}
+                        height={"90%"}
+                        width={Theme.usersOnly.authInfo.dimentions}
                         bg={"gray.900"}
-                        borderRadius={"0 15px 15px 0"}
                     >
                         <Flex
                             p={"2rem"}

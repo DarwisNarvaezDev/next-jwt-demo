@@ -26,5 +26,15 @@ export default {
         dimentions: ['80%', '50vh', '55vh'],
         height: ['50%', '60vh', '70vh']
         }
+    },
+    usersOnly: {
+        container: {
+            dimentions: ['80%', '50%', '50%'],
+            flexDirection: ['column', 'row', 'row'],
+        }, 
+        authInfo: {
+            borders: ["0px, 0px, 15px, 15px","0 15px 15px 0", "0 15px 15px 0"],
+            dimentions: ['100%', '50%', '50%']
+        }
     }
 }
