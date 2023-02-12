@@ -58,7 +58,7 @@ export default function () {
                     width={Theme.usersOnly.container.dimentions}
                     height={"80%"}
                     border={"1px solid gray"}
-                    borderRadius={"15px"}
+                    borderRadius={Theme.usersOnly.authInfo.borders}
                     gap={5}
                     boxShadow={"2xl"}
                     flexDir={Theme.usersOnly.container.flexDirection}
@@ -66,7 +66,6 @@ export default function () {
                     <Flex
                         flexDir={"column"}
                         p={"2rem"}
-                        
                         >
                         <Heading size={"lg"}>You gained access! 🤘</Heading>
                         <Heading ml={"5px"} size={"md"} fontWeight={"light"} mt={"20px"}>Now you can... 🥁</Heading>
@@ -101,6 +100,7 @@ export default function () {
                         height={"90%"}
                         width={Theme.usersOnly.authInfo.dimentions}
                         bg={"gray.900"}
+                        borderRadius={Theme.usersOnly.authInfo.borders}
                     >
                         <Flex
                             p={"2rem"}
