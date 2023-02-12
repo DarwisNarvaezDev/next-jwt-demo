@@ -41,7 +41,7 @@ export default function Home() {
         <Flex
           width={["100%"]}
           height={"100%"}
-          visibility={['hidden', 'visible', 'visible']}
+          visibility={Theme.imageContainer.visibility}
           position={"absolute"}
           justifyContent={"flex-end"}
           zIndex={99}

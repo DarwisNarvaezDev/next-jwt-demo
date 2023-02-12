@@ -1,4 +1,7 @@
 export default {
+    imageContainer: {
+        visibility: ['hidden', 'visible', 'visible'],
+    },
     mainContainer: {
         dimentions: ['100%', '100%', '45%'],
         padding: ['1rem', '2rem', '5rem'],
