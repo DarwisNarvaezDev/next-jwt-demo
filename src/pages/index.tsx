@@ -159,7 +159,7 @@ export default function Home() {
                   fontWeight={Theme.buttonContainer.buttons.fontWeight}
                   cursor={Theme.buttonContainer.buttons.cursor}
                   onClick={()=>{
-                    Router.push('/user/login')
+                    Router.push('/user/usersonly')
                   }}
                 >
                   Users Only | {`<App>/user/usersonly`}

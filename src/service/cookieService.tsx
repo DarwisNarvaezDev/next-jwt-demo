@@ -3,9 +3,9 @@ import { deleteCookie, getCookies, setCookie } from "cookies-next";
 import { NextApiRequest, NextApiResponse } from "next";
 import { appToken } from "./tokenService";
 
-const cookiesKeys = {
-    refreshCookieKey: `${appToken}${'refreshToken'}`,
-    accessCookieKey: `${appToken}${'accessToken'}`,
+export const cookiesKeys = {
+    refreshCookieKey: `${appToken}${'RefreshToken'}`,
+    accessCookieKey: `${appToken}${'AccessToken'}`,
 }
 
 export function createAccessTokenCookie(

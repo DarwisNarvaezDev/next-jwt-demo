@@ -28,7 +28,7 @@ export default function UserForm({
 
     return (
         <>
-            <Heading size={"xl"} color={"white"}>
+            <Heading id="UserFormHeading" size={"xl"} color={"white"}>
                 { view === 'signup' ? 'Sign Up' : 'Login' }
             </Heading>
             <FormControl

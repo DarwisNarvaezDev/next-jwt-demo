@@ -89,6 +89,7 @@ export default function () {
                                 }}
                                 >Follow the dev on GH</Button>
                             <Button 
+                                id={"logoutButton"}
                                 size={"lg"}
                                 onClick={()=>{
                                     logout()
@@ -180,7 +181,7 @@ export async function getServerSideProps({ req, res }: NextPageContext) {
             return {
                 redirect: {
                     permanent: false,
-                    destination: `/user/login?autherror=true&prevpage=usersonly`
+                    destination: `/user/login?autherror=true`
                 }
             }
         }
@@ -188,7 +189,7 @@ export async function getServerSideProps({ req, res }: NextPageContext) {
         return {
             redirect: {
                 permanent: false,
-                destination: `/user/login?autherror=true&prevpage=usersonly`
+                destination: `/user/login?autherror=true`
             }
         }
     }
