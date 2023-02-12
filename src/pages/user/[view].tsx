@@ -158,6 +158,7 @@ export default function userView({ documentTitle }) {
             <Flex
                 width={"100%"}
                 height={"100vh"}
+                visibility={Theme.imageContainer.visibility}
                 position={"absolute"}
                 justifyContent={"flex-end"}
                 zIndex={0}
