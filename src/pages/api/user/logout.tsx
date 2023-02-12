@@ -9,7 +9,7 @@ export default async function handler(
 ) {
     
     const cookies = getCookies({ req, res });
-    let arr = []
+    let arr: any[] = []
     let user: null | number = null
 
     try {

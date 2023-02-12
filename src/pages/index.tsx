@@ -4,6 +4,7 @@ import darkSvg from '/public/drk-indx-bg.svg'
 import brightSvg from '/public/brth-indx-bg.svg'
 import { useEffect, useState } from "react";
 import Theme from "@/util/Theme";
+import Router from 'next/router'
 
 export default function Home() {
 
@@ -158,7 +159,7 @@ export default function Home() {
                   fontWeight={Theme.buttonContainer.buttons.fontWeight}
                   cursor={Theme.buttonContainer.buttons.cursor}
                   onClick={()=>{
-                    window.location.href = '/user/usersonly'
+                    Router.push('/user/login')
                   }}
                 >
                   Users Only | {`<App>/user/usersonly`}

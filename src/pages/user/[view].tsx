@@ -10,8 +10,9 @@ import Image from 'next/image';
 import qs from 'querystring'
 import { useRouter } from 'next/router';
 import Theme from '@/util/Theme';
+import { NextApiRequest } from 'next';
 
-export default function userView({ documentTitle }) {
+export default function userView({ documentTitle }: any) {
 
     const router = useRouter();
 
@@ -205,7 +206,7 @@ export default function userView({ documentTitle }) {
     )
 }
 
-export async function getServerSideProps({ req }) {
+export async function getServerSideProps({ req }: any) {
 
     let documentTitle = 'Login';
     const view = req.url.split('/')[2]
@@ -229,7 +230,7 @@ export async function getServerSideProps({ req }) {
                 }
             }
         }
-        else if (status === 500) {
+        if (status === 500) {
             const error = await (await data).json()
             if (error.name === 'TokenExpiredError') {
                 return {
@@ -240,7 +241,7 @@ export async function getServerSideProps({ req }) {
                 }
             }
         }
-        else if (status === 202) {
+        if (status === 202) {
             return {
                 redirect: {
                     permanent: false,

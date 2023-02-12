@@ -9,7 +9,7 @@ export default async function handler(
     res: NextApiResponse
 ){
     const cookies = getCookies({ req, res });
-    let arr = []
+    let arr: any[] = []
     let user: null | number = null
     let responseList: any[] = []
 
@@ -21,7 +21,7 @@ export default async function handler(
         if (tokens.keysOfRefreshTokens.length > 0 || tokens.keysOfAccessTokens.length > 0) {
             tokens.keysOfRefreshTokens.forEach(line => {
                 if (isValidAccessToken(line.value)) {
-                    const data = getAccessTokenData(line.value);
+                    const data: any = getAccessTokenData(line.value);
                     const { userId } = data;
                     user = userId;                    
                     responseList.push({ key: "Access Token", value: line.value , button: true})

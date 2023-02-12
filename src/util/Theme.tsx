@@ -40,4 +40,4 @@ export default {
             dimentions: ['100%', '50%', '50%']
         }
     }
-}
+} as any

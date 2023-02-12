@@ -1,5 +1,5 @@
 export const appToken: string | any = process.env.APP_TOKEN;
-import jwt from 'jsonwebtoken'
+import jwt, { JsonWebTokenError } from 'jsonwebtoken'
 
 export function createAccessToken(userEmail: string){
     try{
@@ -26,7 +26,7 @@ export function createRefreshToken(userId: string){
 export function isValidAccessToken(accessToken: any){
     try{
         let valid = true
-        jwt.verify(accessToken, appToken, (err, decoded) => {
+        jwt.verify(accessToken, appToken, (err: any, decoded: any) => {
             if( !err ){
                 valid = true
             }
@@ -40,7 +40,7 @@ export function isValidAccessToken(accessToken: any){
 export function isValidRefreshToken(refreshToken: string){
     try{
         let valid = true
-        jwt.verify(refreshToken, appToken, (err, decoded) => {
+        jwt.verify(refreshToken, appToken, (err: any, decoded: any) => {
             if( !err ){
                 valid = true
             }
@@ -75,7 +75,7 @@ export function getValidTokens(tokensArray: string[]){
 export function getRefreshTokenData(refreshToken: string){
     try{
         let decodedUser = null
-        const validToken = jwt.verify(refreshToken, appToken, (err, decoded) => {
+        const validToken = jwt.verify(refreshToken, appToken, (err: any, decoded: any) => {
             if( err ){
                 return false
             }else{
@@ -91,7 +91,7 @@ export function getRefreshTokenData(refreshToken: string){
 export function getAccessTokenData(accessToken: string){
     try{
         let decodedUser = null
-        const validToken = jwt.verify(accessToken, appToken, (err, decoded) => {
+        const validToken = jwt.verify(accessToken, appToken, (err: any, decoded: any) => {
             if( err ){
                 return false
             }else{

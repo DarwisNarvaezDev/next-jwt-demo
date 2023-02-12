@@ -1,8 +1,9 @@
 import { Button, Flex, Heading, IconButton, Link, List, ListItem, Text, useColorMode } from "@chakra-ui/react";
 import { ExternalLinkIcon } from '@chakra-ui/icons'
-import qs from 'querystring'
+import qs, { ParsedUrlQuery } from 'querystring'
 import { useEffect, useState } from "react";
 import Theme from "@/util/Theme";
+import { NextPageContext } from "next";
 
 export default function () {
 
@@ -20,20 +21,6 @@ export default function () {
         const json = await data.json();
         if (data.ok) {
             window.location.replace('/')
-        }
-    }
-
-    async function deleteAccessOrRefresh(key) {
-        const data = await fetch('/api/user/revoketoken', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept":"*"
-            }, body: JSON.stringify(key)
-        });
-        const json = await data.json();
-        if (data.ok) {
-            window.location.reload()
         }
     }
 
@@ -89,7 +76,6 @@ export default function () {
                             borderRadius={"15px"}
                             flexDir={"column"}
                             height={"100%"}
-                            mt={"10px"}
                             justifyContent={"center"}
                             alignItems={"center"}
                             mt={"1rem"}
@@ -151,13 +137,7 @@ export default function () {
                                                     <Text
                                                     fontWeight={"thin"}
                                                     mb={"20px"}
-                                                    ><strong>{line.key} {line.button && (<Button onClick={()=>{
-                                                        if( line.value.includes('Access') ){
-                                                            deleteAccessOrRefresh({ deleteRefresh: true })
-                                                        }else{
-                                                            deleteAccessOrRefresh({ deleteAccess: true })
-                                                        }
-                                                    }} bg={"red"} color={"black"} size={"xs"}>Revoke</Button>)} </strong>: {`${line.value}`}</Text>
+                                                    ><strong>{line.key}</strong>: {`${line.value}`}</Text>
                                                 </Flex>
                                             </Flex>
                                         )
@@ -172,9 +152,11 @@ export default function () {
     )
 }
 
-export async function getServerSideProps({ req, res }) {
+export async function getServerSideProps({ req, res }: NextPageContext) {
 
-    const queryString = qs.decode(req.headers?.cookie, "; ");
+    const requestHeadersCookies = req?.headers?.cookie;
+
+    const queryString: ParsedUrlQuery | string | undefined = qs.decode(requestHeadersCookies as any, "; ");
 
     if (Object.keys(queryString).length !== 0) {
         const data = fetch('http://127.0.0.1:3000/api/user/checkauth', {

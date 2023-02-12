@@ -11,7 +11,7 @@ export default async function handler(
     console.log(`ref: ${deleteRefresh} | accss: ${deleteAccess}`);
 
     const cookies = getCookies({ req, res });
-    let arr = []
+    let arr: any[] = []
     let user: null | number = null
 
     try {

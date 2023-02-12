@@ -14,7 +14,7 @@ export default function handler(
     const headers = req.headers
     const cookies = req.cookies
 
-    let arr = []
+    let arr: any[] = []
 
     try {
         Object.entries(body).forEach( line => {
