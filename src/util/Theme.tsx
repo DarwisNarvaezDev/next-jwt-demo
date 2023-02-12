@@ -36,7 +36,8 @@ export default {
             flexDirection: ['column', 'row', 'row'],
         }, 
         authInfo: {
-            borders: ["0px, 0px, 0px, 0px","0 15px 15px 0", "0 15px 15px 0"],
+            borders: ["15px","0 15px 15px 0", "0 15px 15px 0"],
+            bordersInternal: ["0 0 15px 15px","0 15px 15px 0", "0 15px 15px 0"],
             dimentions: ['100%', '50%', '50%']
         }
     }

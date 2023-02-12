@@ -100,7 +100,7 @@ export default function () {
                         height={"90%"}
                         width={Theme.usersOnly.authInfo.dimentions}
                         bg={"gray.900"}
-                        borderRadius={Theme.usersOnly.authInfo.borders}
+                        borderRadius={Theme.usersOnly.authInfo.bordersInternal}
                     >
                         <Flex
                             p={"2rem"}
