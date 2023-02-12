@@ -16,9 +16,6 @@ export default function handler(
 
     let arr: any[] = []
 
-    console.log("hey");
-    
-
     try {
         Object.entries(body).forEach( line => {
             arr.push({ key: line[0], value: line[1] })
