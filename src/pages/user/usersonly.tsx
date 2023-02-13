@@ -111,7 +111,6 @@ export default function () {
                             color={"gray.200"}
                             flexDir={"column"}
                             height={"100%"}
-                            width={"100%"}
                         >
                             <Heading size={"md"}>Auth Information</Heading>
                             <Flex

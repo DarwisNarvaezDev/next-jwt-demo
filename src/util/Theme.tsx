@@ -32,7 +32,7 @@ export default {
     },
     usersOnly: {
         container: {
-            dimentions: ['80%', '50%', '50%'],
+            dimentions: ['80%', '40%', '40%'],
             flexDirection: ['column', 'row', 'row'],
         }, 
         authInfo: {
