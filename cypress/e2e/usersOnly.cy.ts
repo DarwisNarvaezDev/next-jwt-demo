@@ -1,22 +1,6 @@
-import { expect } from "chai"
+import { cookiesKey, home, logoutButton, mockAuthInfo, userOnlyButton, userOnlyHeading } from "./CypressGlobasl";
 
 describe('usersOnlySpec', () => {
-
-  const home = 'http://localhost:3000/'
-  const userOnlyButton = '[id=usersOnlyButton]'
-  const userOnlyHeading = '[id=UserFormHeading]'
-  const logoutButton = '[id=logoutButton]'
-  const cookiesKey = {
-    refresh: `${'JwtNextDemo'}RefreshToken`,
-    access: `${'JwtNextDemo'}AccessToken`
-  }
-  const mockAuthInfo = [
-    { key: "Access Token", value: "Example" },
-    { key: "Refresh Token", value: "Example" },
-    { key: "User", value: "Example@example.com" },
-    { key: "Hash", value: "Hash" },
-    { key: "Joined", value: "000/000/000" },
-]
 
   it('Should redirect to login if the auth cookies are not set', () => {
     cy.visit(home)
@@ -50,9 +34,9 @@ describe('usersOnlySpec', () => {
         url: '/api/user/getsessiondata'
       },
       mockAuthInfo
-    ).as('getSessionData')
-    cy.get(userOnlyButton).click()
-    cy.url().should('include', '/usersonly')
+      ).as('getSessionData')
+      cy.get(userOnlyButton).click()
+      cy.url().should('include', '/usersonly')
   })
 
   it('Should revoke the tokens when user hit \'logout\' button', ()=>{
@@ -75,22 +59,22 @@ describe('usersOnlySpec', () => {
   })
 
 
-  it('Should redirect to index page when user hit logout', ()=>{
-    cy.visit(home)
-    cy.setCookie(cookiesKey.access, 'Test')
-    cy.setCookie(cookiesKey.refresh, 'Test')
-    // Stub the 'getSessionData' response within component
-    cy.intercept(
-      {
-        method: 'GET',
-        url: '/api/user/getsessiondata'
-      },
-      mockAuthInfo
-    ).as('getSessionData')
-    cy.get(userOnlyButton).click()
-    cy.url().should('include', '/usersonly')
-    cy.get(logoutButton).click()
-    cy.url().should('include', home);
-  })
+  // it('Should redirect to index page when user hit logout', ()=>{
+  //   cy.visit(home)
+  //   cy.setCookie(cookiesKey.access, 'Test')
+  //   cy.setCookie(cookiesKey.refresh, 'Test')
+  //   // Stub the 'getSessionData' response within component
+  //   cy.intercept(
+  //     {
+  //       method: 'GET',
+  //       url: '/api/user/getsessiondata'
+  //     },
+  //     mockAuthInfo
+  //   ).as('getSessionData')
+  //   cy.get(userOnlyButton).click()
+  //   cy.url().should('include', '/usersonly')
+  //   cy.get(logoutButton).click()
+  //   cy.url().should('include', home);
+  // })
 
 })

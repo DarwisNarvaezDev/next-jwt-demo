@@ -6,9 +6,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3005",
     "lint": "next lint",
-    "cypress": "cypress open"
+    "cypress": "cypress open",
+    "deploy": ""
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.17",

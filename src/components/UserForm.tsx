@@ -42,7 +42,7 @@ export default function UserForm({
                 color={"gray.400"}
             >
                 <FormLabel>Email</FormLabel>
-                <Input type={"email"} ref={usernameRef}
+                <Input type={"email"} ref={usernameRef} id={`${view}EmailInput`}
                     onKeyDown={(e) => {
                         if (e.code === "Enter") {
                             if (validateForm()){
@@ -56,7 +56,7 @@ export default function UserForm({
                     }}
                 />
                 <FormLabel mt={"5"}>Password</FormLabel>
-                <Input type={"password"} ref={passwordRef}
+                <Input type={"password"} ref={passwordRef} id={`${view}PasswordInput`}
                     onKeyDown={(e) => {
                         if (e.code === "Enter") {
                             if (validateForm()){
@@ -74,6 +74,7 @@ export default function UserForm({
                     justifyContent={"center"}
                 >
                     <Input
+                        id={`${view}Button`}
                         w={"50%"}
                         mt={"3rem"}
                         type={"submit"}

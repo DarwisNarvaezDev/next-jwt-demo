@@ -4,6 +4,7 @@ import qs, { ParsedUrlQuery } from 'querystring'
 import { useEffect, useState } from "react";
 import Theme from "@/util/Theme";
 import { NextPageContext } from "next";
+import Router from "next/router";
 
 export default function () {
 
@@ -20,7 +21,8 @@ export default function () {
         const data = await fetch('/api/user/logout');
         const json = await data.json();
         if (data.ok) {
-            window.location.replace('/')
+            Router.push('/')
+            // window.location.replace('/')
         }
     }
 
@@ -85,7 +87,8 @@ export default function () {
                             <Button 
                                 size={"lg"}
                                 onClick={()=>{
-                                    window.location.replace('https://github.com/DarwisNarvaezDev')
+                                    Router.push('https://github.com/DarwisNarvaezDev')
+                                    // window.location.replace('https://github.com/DarwisNarvaezDev')
                                 }}
                                 >Follow the dev on GH</Button>
                             <Button 
