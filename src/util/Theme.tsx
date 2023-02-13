@@ -21,7 +21,7 @@ export default {
             borderRadius: ['10px', '10px', '10px'],
             padding: ['1rem', '1rem', '1rem'],
             fontWeight: ['semibold', 'semibold', 'semibold'],
-            cursor: "pointer"
+            cursor: "pointer",
         }
     },
     form: {

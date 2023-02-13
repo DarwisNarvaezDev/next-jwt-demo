@@ -45,7 +45,7 @@ export default async function handler(
         }
         res.status(400).json("Unauthorized")
     } catch (error) {
-        res.status(500).json("Hey")
+        res.status(500).json("Server error")
     }
 
 }

@@ -10,7 +10,7 @@ import Image from 'next/image';
 import qs from 'querystring'
 import { useRouter } from 'next/router';
 import Theme from '@/util/Theme';
-import { NextApiRequest } from 'next';
+import Router from 'next/router'
 
 export default function userView({ documentTitle }: any) {
 
@@ -80,7 +80,8 @@ export default function userView({ documentTitle }: any) {
                 status: "success",
             })
             // Redirect to usersonly
-            window.location.replace('/user/usersonly')
+            Router.push('/user/usersonly')
+            // window.location.replace('/user/usersonly')
         }
     }
     // Register form ==============
@@ -120,7 +121,8 @@ export default function userView({ documentTitle }: any) {
                 status: "success",
             })
             // Login succeds
-            window.location.replace('/user/usersonly')
+            // window.location.replace('/user/usersonly')
+            Router.push('/user/usersonly')
         }
     }
     // Login form ==============

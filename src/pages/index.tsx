@@ -100,11 +100,12 @@ export default function Home() {
                 <Heading size={"md"} mt={"10px"}>First you have to login!</Heading>
                 <Flex
                   id="SignUpButton"
+                  bg={colorMode === 'dark' ? 'gray.700' : 'gray.100'}
+                  boxShadow={"lg"}
                   width={Theme.buttonContainer.buttons.width}
                   borderRadius={Theme.buttonContainer.buttons.borderRadius}
                   textAlign={"center"}
                   justifyContent={"center"}
-                  bg={"gray.200"}
                   p={Theme.buttonContainer.buttons.padding}
                   cursor={Theme.buttonContainer.buttons.cursor}
                   fontWeight={Theme.buttonContainer.buttons.fontWeight}
@@ -116,12 +117,13 @@ export default function Home() {
                 </Flex>
                 <Flex
                   id="loginButton"
+                  bg={colorMode === 'dark' ? 'gray.700' : 'gray.100'}
+                  boxShadow={"lg"}
                   width={Theme.buttonContainer.buttons.width}
                   borderRadius={Theme.buttonContainer.buttons.borderRadius}
                   cursor={Theme.buttonContainer.buttons.cursor}
                   textAlign={"center"}
                   justifyContent={"center"}
-                  bg={"gray.200"}
                   p={Theme.buttonContainer.buttons.padding}
                   fontWeight={Theme.buttonContainer.buttons.fontWeight}
                   onClick={()=>{
@@ -153,13 +155,14 @@ export default function Home() {
                   id="usersOnlyButton"
                   width={Theme.buttonContainer.buttons.width}
                   borderRadius={Theme.buttonContainer.buttons.borderRadius}
-                  bg={"gray.200"}
+                  bg={colorMode === 'dark' ? 'gray.700' : 'gray.100'}
+                  boxShadow={"lg"}
                   justifyContent={"center"}
                   p={Theme.buttonContainer.buttons.padding}
                   fontWeight={Theme.buttonContainer.buttons.fontWeight}
                   cursor={Theme.buttonContainer.buttons.cursor}
                   onClick={()=>{
-                    Router.push('/user/login')
+                    Router.push('/user/usersonly')
                   }}
                 >
                   Users Only | {`<App>/user/usersonly`}
