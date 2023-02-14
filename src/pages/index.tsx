@@ -1,35 +1,36 @@
-import { Button, Flex, Heading, Text, theme, useColorMode } from "@chakra-ui/react";
+import { Button, Flex, Heading, IconButton, Switch, Text, theme, useColorMode } from "@chakra-ui/react";
 import Image from "next/image";
 import darkSvg from '/public/drk-indx-bg.svg'
 import brightSvg from '/public/brth-indx-bg.svg'
 import { useEffect, useState } from "react";
 import Theme from "@/util/Theme";
 import Router from 'next/router'
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 export default function Home() {
 
-  const { colorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
 
-  const [ indexButtons, setIndexButtons ] = useState([
-    { id: 0, name: 'Sign Up', link: '/user/signup'  },
-    { id: 1, name: 'Login', link: '/user/login'  },
-    { id: 2, name: 'Users Only', link: '/user/usersonly'  },
+  const [indexButtons, setIndexButtons] = useState([
+    { id: 0, name: 'Sign Up', link: '/user/signup' },
+    { id: 1, name: 'Login', link: '/user/login' },
+    { id: 2, name: 'Users Only', link: '/user/usersonly' },
   ]);
 
   useEffect(() => {
     document.title = "Home | JWT Demo"
     let flag = false
-    setInterval(()=>{
-      if( !flag ){
+    setInterval(() => {
+      if (!flag) {
         document.title = "Home | JWT Demo"
         flag = !flag
-      }else{
+      } else {
         document.title = "Sign up!"
         flag = !flag
       }
     }, 3000)
   }, [])
-  
+
 
   return (
     <>
@@ -38,7 +39,7 @@ export default function Home() {
         id={"Greeter"}
         h={"100vh"}
         position={"relative"}
-        >
+      >
         <Flex
           width={["100%"]}
           height={"100%"}
@@ -46,7 +47,7 @@ export default function Home() {
           position={"absolute"}
           justifyContent={"flex-end"}
           zIndex={99}
-          >
+        >
           <Image height={600} alt="greeter" src={colorMode === 'dark' ? darkSvg : brightSvg} />
         </Flex>
         <Flex
@@ -59,6 +60,17 @@ export default function Home() {
           position={'absolute'}
           zIndex={99999}
         >
+          <Flex
+            mb={"1rem"}
+            width={"100%"}
+            height={"50px"}
+            gap={3}
+            alignItems={"center"}
+          >
+            <IconButton aria-label="Toggle Color Mode" icon={colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
+              onClick={toggleColorMode}
+            ></IconButton>
+          </Flex>
           <Flex
             flexDir={"column"}
             width={"100%"}
@@ -80,9 +92,9 @@ export default function Home() {
               <Flex
                 width={Theme.appHeaderContainer.secondaryTextDimentions}
               >
-              <Text 
-                fontWeight={Theme.appHeaderContainer.fontWeight}
-                fontSize={Theme.appHeaderContainer.secondaryText}
+                <Text
+                  fontWeight={Theme.appHeaderContainer.fontWeight}
+                  fontSize={Theme.appHeaderContainer.secondaryText}
                 >Please go to the routes and start demoing away!</Text>
               </Flex>
               <Flex
@@ -109,7 +121,7 @@ export default function Home() {
                   p={Theme.buttonContainer.buttons.padding}
                   cursor={Theme.buttonContainer.buttons.cursor}
                   fontWeight={Theme.buttonContainer.buttons.fontWeight}
-                  onClick={()=>{
+                  onClick={() => {
                     window.location.href = '/user/signup'
                   }}
                 >
@@ -126,7 +138,7 @@ export default function Home() {
                   justifyContent={"center"}
                   p={Theme.buttonContainer.buttons.padding}
                   fontWeight={Theme.buttonContainer.buttons.fontWeight}
-                  onClick={()=>{
+                  onClick={() => {
                     window.location.href = '/user/login'
                   }}
                 >
@@ -161,7 +173,7 @@ export default function Home() {
                   p={Theme.buttonContainer.buttons.padding}
                   fontWeight={Theme.buttonContainer.buttons.fontWeight}
                   cursor={Theme.buttonContainer.buttons.cursor}
-                  onClick={()=>{
+                  onClick={() => {
                     Router.push('/user/usersonly')
                   }}
                 >
@@ -169,7 +181,6 @@ export default function Home() {
                 </Flex>
               </Flex>
             </Flex>
-
           </Flex>
         </Flex>
       </Flex>

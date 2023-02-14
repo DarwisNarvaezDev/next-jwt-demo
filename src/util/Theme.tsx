@@ -4,7 +4,7 @@ export default {
     },
     mainContainer: {
         dimentions: ['100%', '100%', '45%'],
-        padding: ['1rem', '2rem', '5rem'],
+        padding: ['1rem', '2rem', '4rem'],
         textAlign: ['center', 'center', 'left'],
     },
     appHeaderContainer: {

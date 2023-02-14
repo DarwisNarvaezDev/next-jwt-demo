@@ -64,11 +64,11 @@ export default function () {
                     gap={5}
                     boxShadow={"2xl"}
                     flexDir={Theme.usersOnly.container.flexDirection}
-                    >
+                >
                     <Flex
                         flexDir={"column"}
                         p={"2rem"}
-                        >
+                    >
                         <Heading size={"lg"}>You gained access! 🤘</Heading>
                         <Heading ml={"5px"} size={"md"} fontWeight={"light"} mt={"20px"}>Now you can... 🥁</Heading>
                         <Flex
@@ -84,20 +84,27 @@ export default function () {
                             paddingBottom={"1rem"}
                             gap={8}
                         >
-                            <Button 
+                            <Button
                                 size={"lg"}
-                                onClick={()=>{
+                                onClick={() => {
                                     Router.push('https://github.com/DarwisNarvaezDev')
                                     // window.location.replace('https://github.com/DarwisNarvaezDev')
                                 }}
-                                >Follow the dev on GH</Button>
-                            <Button 
+                            >Follow the dev on GH</Button>
+                            <Button
                                 id={"logoutButton"}
                                 size={"lg"}
-                                onClick={()=>{
+                                onClick={() => {
                                     logout()
                                 }}
-                                >Logout</Button>
+                            >Logout</Button>
+                            <Button
+                                id={"GoBackButton"}
+                                size={"lg"}
+                                onClick={() => {
+                                    Router.push("/")
+                                }}
+                            >Go Back</Button>
                         </Flex>
                     </Flex>
                     <Flex
@@ -132,14 +139,14 @@ export default function () {
                                                 whiteSpace={"break-spaces"}
                                                 wrap={"wrap"}
                                                 wordBreak={"break-word"}
-                                                >
+                                            >
                                                 <Flex
                                                     height={"100%"}
                                                     width={"100%"}
                                                 >
                                                     <Text
-                                                    fontWeight={"thin"}
-                                                    mb={"20px"}
+                                                        fontWeight={"thin"}
+                                                        mb={"20px"}
                                                     ><strong>{line.key}</strong>: {`${line.value}`}</Text>
                                                 </Flex>
                                             </Flex>
