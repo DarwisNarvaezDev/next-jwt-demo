@@ -21,3 +21,12 @@ Batch 1 run: 2 migrations
 ```
 7. Run ```npm install``` to install the needed dependencies and finally 
 6. By running the following command: ```npm run dev``` to deploy the next.js app in your local server. :bowtie: enjoy!
+
+**NOTE:** The project is currently production-optimized, so you can go ahead and hit ```npm run build``` and deploy the app wherever you want.
+
+# To test it
+The app has Cypress.js coverage, [Read more](https://nextjs.org/docs/testing)
+
+1. Install node dependencies: ```npm install```
+2. Then run the **DEV** environment ```npm run dev```
+3. execute the runnable inside cypress node modules pointing to **Firefox** browser: ```./node_modules/cypress/bin/cypress run --browser firefox```
